@@ -9,7 +9,7 @@ import { Model } from 'mongoose';
 import { sleep } from 'src/utils/sleep';
 import { Flow, FlowDocument } from 'src/schema/flow.schema';
 import {
-    CreateFlowDto
+    CreateFlowDto, FlowQuery
 } from 'src/types/flow.dto';
 
 
@@ -30,6 +30,15 @@ export class FlowProvider {
         const res = createdData.save();
         return res;
     }
+
+    async getAll(
+        query: FlowQuery
+    ): Promise<Flow[]> {
+        return await this.flowModel.find()
+          .sort({ id: 1 })
+          .exec();
+    }
+
 
     async getNewId() {
         while (this.idLock) {

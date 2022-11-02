@@ -7,10 +7,10 @@ import {
 } from '@nestjs/common';
 import { FlowProvider } from 'src/provider/flow.provider';
 import {
-    CreateFlowDto
+    CreateFlowDto, FlowQuery
 } from 'src/types/flow.dto';
 
-@Controller('/api/manager/flow')
+@Controller('/api/flow')
 export class FlowController {
     constructor(
         private readonly flowProvider: FlowProvider
@@ -31,5 +31,28 @@ export class FlowController {
             data,
         };
     }
+
+    
+    /**
+     * 创建一笔流水
+     * 
+     * @param req 
+     * @param createDto 流水信息传输实体
+     * @returns 
+     */
+     @Get('/getAll')
+     async getAll(@Req() query: FlowQuery) {
+         const data = await this.flowProvider.getAll(query);
+         return {
+             code: 200,
+             data: {
+                pageNum : 1,
+                pageSize: data.length,
+                totalNum: data.length,
+                dataList: data
+             },
+         };
+     }
+ 
 
 }
