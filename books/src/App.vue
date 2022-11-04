@@ -1,59 +1,88 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<template>
+  <div class="common-layout">
+    <el-container>
 
+      <el-header>
+        <div class="headerInfo">
+          <a href="https://oldmoon.top/">
+            <img alt="oldmoon logo" class="logo" src="./static/images/oldmoon.dark.png" width="60" height="60" />
+          </a>
+        </div>
+        <div class="headerInfo">
+          <h1 style="margin-top: 20px;">DDD-CashBook</h1>
+        </div>
+      </el-header>
+
+      <el-main>
+        <div class="charts">
+          <div class="chart">
+            <LineChart />
+          </div>
+          <div class="chart">
+            <PieChart />
+          </div>
+        </div>
+
+        <div class="table">
+          <Suspense>
+            <template #default>
+              <FlowTable />
+            </template>
+            <template #fallback>
+              <div>加载中...</div>
+            </template>
+          </Suspense>
+        </div>
+      </el-main>
+
+
+      <el-footer>
+        Footer
+      </el-footer>
+
+    </el-container>
+  </div>
+</template>
+
+<script setup lang="ts">
+import "./assets/base.css";
+// 同步组件引用
+import LineChart from './components/LineChart.vue'
+import PieChart from './components/PieChart.vue'
+
+// 异步组件引用
 import { defineAsyncComponent } from 'vue'
 const FlowTable = defineAsyncComponent(() => import("./components/FlowTable.vue"));
 </script>
 
-<template>
-  
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <Suspense>
-        <template #default>
-          <FlowTable/>
-        </template>
-        <template #fallback>
-          <div>加载中...</div>
-        </template>
-      </Suspense>
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
-</template>
-
 <style scoped>
-header {
-  line-height: 1.5;
+.headerInfo {
+  margin-top: 10px;
+  margin-right: 20px;
+  float: left;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.el-main {
+  padding-top: 5px;
+  padding-left: 200px;
+  padding-right: 200px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+.charts {
+  height: 300px;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+.chart {
+  float: left;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+
+.table {
+  float: none;
+}
+
+.el-footer {
+  box-align: center;
+  text-align: center;
 }
 </style>
