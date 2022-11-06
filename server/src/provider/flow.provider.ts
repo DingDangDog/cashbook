@@ -9,8 +9,9 @@ import { Model } from 'mongoose';
 import { sleep } from 'src/utils/sleep';
 import { Flow, FlowDocument } from 'src/schema/flow.schema';
 import {
-    CreateFlowDto, FlowQuery
+    CreateFlowDto, UpdateFlowDto, FlowQuery
 } from 'src/types/flow.dto';
+import { Page } from 'src/types/common/page.dto'
 
 
 @Injectable()
@@ -20,6 +21,52 @@ export class FlowProvider {
         @InjectModel('Flow')
         private flowModel: Model<FlowDocument>
     ) { }
+
+
+    async getPage(
+        query: FlowQuery
+    ): Promise<Page<Flow>> {
+
+        let and = [];
+
+        if (query.startDay) {
+            and.push({ day: { $gte: query.startDay } });
+        }
+        if (query.endDay) {
+            and.push({ day: { $lte: query.endDay } });
+        }
+        if (query.id) {
+            and.push({ $eq: query.id });
+        }
+        if (query.name) {
+            and.push({ name: { $regex: query.name } });
+        }
+        if (query.description) {
+            and.push({ description: { $regex: query.description } });
+        }
+        if (query.type) {
+            and.push({ type: { $eq: query.type } });
+        }
+        const quertOption = and.length > 0 ? { $and: and, } : {};
+
+        // console.log(JSON.stringify(quertOption));
+        const data: Flow[] = await this.flowModel.find(quertOption)
+            .sort({ day: -1 })
+            .skip(query.pageSize * query.pageNum - query.pageSize)
+            .limit(query.pageSize)
+            .exec();
+
+        // 单独查询符合条件的数据总数
+        const total = await this.flowModel.count(quertOption).exec();
+        const page = new Page<Flow>();
+        page.pageData = data;
+        page.pageSize = data.length;
+        page.totalCount = total;
+        page.totalPage = Math.ceil(total > query.pageSize ? total / query.pageSize : 1);
+        page.pageNum = parseInt(query.pageNum as any);
+        return page;
+    }
+
 
     async create(
         createFlowDto: CreateFlowDto
@@ -31,12 +78,30 @@ export class FlowProvider {
         return res;
     }
 
+    async update(
+        id: number,
+        updateFlowDto: UpdateFlowDto
+    ) {
+        const res = this.flowModel.updateOne(
+            { id },
+            { ...updateFlowDto, },
+        );
+        return res;
+    }
+
+    async delete(
+        id: number
+    ) {
+        const data = this.flowModel.deleteOne({ 'id': id });
+        return data;
+    }
+
     async getAll(
         query: FlowQuery
     ): Promise<Flow[]> {
         return await this.flowModel.find()
-          .sort({ id: 1 })
-          .exec();
+            .sort({ day: -1 })
+            .exec();
     }
 
 
@@ -45,7 +110,7 @@ export class FlowProvider {
             await sleep(10);
         }
         this.idLock = true;
-        const maxObj = await this.flowModel.find({}).sort({ id: -1 }).limit(1);
+        const maxObj = await this.flowModel.find({}).sort({ id: -1 }).limit(1).exec();
         let res = 1;
         if (maxObj.length) {
             res = maxObj[0].id + 1;
