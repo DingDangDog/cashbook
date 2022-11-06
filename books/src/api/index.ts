@@ -13,7 +13,7 @@ const $http = axios.create({
     }
 })
 
-// 拦截请求，为请求header中增加token
+// 请求拦截：为请求header中增加token
 $http.interceptors.request.use(config => {
     // baseURL/headers 属性可能不存在，若不存在设置默认值
     config.baseURL = config.baseURL || '';
@@ -37,7 +37,7 @@ $http.interceptors.response.use(res => {
         ElMessage.error(res.data.message);
         return Promise.reject(res.data);
     }
-    return res.data
+    return res.data.data
 }, err => {
     console.log(err);
 })

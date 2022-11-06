@@ -1,31 +1,41 @@
 export interface Flow {
     id: number;
     day: Date;
+    name?: string;
+    description?: string;
+    money: number;
+    type: string;
+}
+/**
+ * 创建流水的传输实体
+ */
+ export interface CreateFlowDto {
+    day: Date;
     name: string;
     description: string;
     money: number;
     type: string;
 }
 
-export interface FlowPage {
-    pageNum: number;
-    pageSize: number;
-    dataList: Flow[];
-    totalNum: number;
+
+/**
+ * 更新流水的传输实体
+ */
+export interface UpdateFlowDto {
+    day: Date;
+    name: string;
+    description: string;
+    money: number;
+    type: string;
 }
 
-export class InitFlowPage {
-    flowPage: FlowPage = {
-        pageNum: 1,
-        pageSize: 1,
-        dataList: [{
-            id: 1,
-            day: new Date(),
-            name: "测试",
-            description: "测试流水",
-            money: 1,
-            type: "测试类型",
-        }],
-        totalNum: 1
-    }
+export class FlowQuery {
+    pageNum: number = 1;
+    pageSize: number = 10;
+    id?: number;
+    startDay?: Date;
+    endDay?: Date;
+    name?: string;
+    description?: string;
+    type?: string;
 }
