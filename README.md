@@ -21,11 +21,11 @@ DDD记账本
 
 - 暗色
 
-![image-20221106203701002](./images./image-20221106203701002.png)
+![image-20221106203701002](./images/image-20221106203701002.png)
 
 - 亮色
 
-![image-20221106203643954](./images./image-20221106203643954.png)
+![image-20221106203643954](./images/image-20221106203643954.png)
 
 ### 登录状态
 
@@ -45,11 +45,11 @@ DDD记账本
 
 - 设置后，弹出提示框，关闭后弹窗，页面会刷新并重新加载数据。
 
-![image-20221106202806204](E:\code\DingDangDog_sapce\ddd-cashbook\images\image-20221106202806204.png)
+![image-20221106202806204](./images/image-20221106202806204.png)
 
 - 取消后，会弹出系统不可用提示框
 
-![image-20221106203056251](E:\code\DingDangDog_sapce\ddd-cashbook\images\image-20221106203056251.png)
+![image-20221106203056251](./images/image-20221106203056251.png)
 
 ### 清除ID
 
