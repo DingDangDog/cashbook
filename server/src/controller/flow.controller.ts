@@ -32,9 +32,10 @@ export class FlowController {
         @Query('pageSize') pageSize = 10,
         @Query('startDay') startDay,
         @Query('endDay') endDay,
+        @Query('type') type,
+        @Query('payType') payType,
         @Query('name') name,
         @Query('description') description,
-        @Query('type') type,
         @Query('id') id
     ) {
         const query: FlowQuery = {
@@ -43,9 +44,10 @@ export class FlowController {
             id: id,
             startDay: startDay,
             endDay: endDay,
+            type: type,
+            payType: payType,
             name: name,
-            description: description,
-            type: type
+            description: description
         }
         const data = await this.flowProvider.getPage(query);
         return {

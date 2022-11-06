@@ -35,6 +35,12 @@ export class FlowProvider {
         if (query.endDay) {
             and.push({ day: { $lte: query.endDay } });
         }
+        if (query.type) {
+            and.push({ type: { $eq: query.type } });
+        }
+        if (query.payType) {
+            and.push({ payType: { $eq: query.payType } });
+        }
         if (query.id) {
             and.push({ $eq: query.id });
         }
@@ -43,9 +49,6 @@ export class FlowProvider {
         }
         if (query.description) {
             and.push({ description: { $regex: query.description } });
-        }
-        if (query.type) {
-            and.push({ type: { $eq: query.type } });
         }
         const quertOption = and.length > 0 ? { $and: and, } : {};
 

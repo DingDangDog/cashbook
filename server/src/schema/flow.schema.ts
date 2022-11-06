@@ -12,16 +12,20 @@ export class Flow extends Document {
     day: Date;
 
     @Prop()
-    name: string;
-
-    @Prop()
-    description: string;
+    type: string;
 
     @Prop()
     money: number;
 
     @Prop()
-    type: string;
+    payType: string;
+
+    @Prop()
+    name: string;
+
+    @Prop()
+    description: string;
+
 }
 
 export const FlowSchema = SchemaFactory.createForClass(Flow);
