@@ -1,20 +1,22 @@
 export interface Flow {
-    id: number;
-    day: Date;
+    id?: number;
+    day?: Date;
+    type?: string;
+    payType?: string;
+    money?: number;
     name?: string;
     description?: string;
-    money: number;
-    type: string;
 }
 /**
  * 创建流水的传输实体
  */
- export interface CreateFlowDto {
-    day: Date;
-    name: string;
-    description: string;
-    money: number;
-    type: string;
+export interface CreateFlowDto {
+    day?: Date;
+    type?: string;
+    payType?: string;
+    money?: number;
+    name?: string;
+    description?: string;
 }
 
 
@@ -22,11 +24,12 @@ export interface Flow {
  * 更新流水的传输实体
  */
 export interface UpdateFlowDto {
-    day: Date;
-    name: string;
-    description: string;
-    money: number;
-    type: string;
+    day?: Date;
+    type?: string;
+    payType?: string;
+    money?: number;
+    name?: string;
+    description?: string;
 }
 
 export class FlowQuery {
@@ -35,7 +38,8 @@ export class FlowQuery {
     id?: number;
     startDay?: Date;
     endDay?: Date;
+    type?: string;
+    payType?: string;
     name?: string;
     description?: string;
-    type?: string;
 }

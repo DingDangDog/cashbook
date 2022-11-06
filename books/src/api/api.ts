@@ -1,6 +1,7 @@
 import $http from './index'
 import type { Page } from '../types/page';
 import type { Flow, FlowQuery, CreateFlowDto, UpdateFlowDto } from '../types/flow';
+import type { UpdateResult, DeleteResult } from '../types/mongoose';
 
 /**
  * 查询流水
@@ -23,7 +24,7 @@ export function getFlowPage(query: FlowQuery): Promise<Page<Flow>> {
  * 新增流水
  * @returns Page<Flow>
  */
-export function create(createDto: CreateFlowDto) {
+export function create(createDto: CreateFlowDto): Promise<Flow> {
     return $http({ url: "/flow", method: "post", data: createDto })
 }
 
@@ -32,7 +33,7 @@ export function create(createDto: CreateFlowDto) {
  * 修改流水
  * @returns Page<Flow>
  */
-export function update(id: number, updateDto: UpdateFlowDto) {
+export function update(id: number, updateDto: UpdateFlowDto): Promise<UpdateResult> {
     return $http({ url: "/flow/" + id, method: "put", data: updateDto })
 }
 
@@ -41,6 +42,6 @@ export function update(id: number, updateDto: UpdateFlowDto) {
  * 删除流水
  * @returns Page<Flow>
  */
-export function deleteFlow(id: number) {
+export function deleteFlow(id: number): Promise<DeleteResult> {
     return $http({ url: "/flow/" + id, method: "delete" })
 }
