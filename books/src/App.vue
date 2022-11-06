@@ -5,18 +5,33 @@
       <el-header>
         <div class="headerInfo">
           <a href="https://oldmoon.top/">
-            <img alt="oldmoon logo" class="logo" src="./static/images/oldmoon.dark.png" width="60" height="60" />
+            <img alt="oldmoon logo" v-if="isDark ? true : false" class="logo" src="./static/images/oldmoon.dark.png"
+              width="60" height="60" />
+            <img alt="oldmoon logo" v-if="isDark ? false : true" class="logo" src="./static/images/oldmoon.light.png"
+              width="60" height="60" />
           </a>
         </div>
         <div class="headerInfo">
           <h1 style="margin-top: 20px;">DDD-CashBook</h1>
         </div>
-        <button class="themeButton" style="margin-top: 30px;" @click="toggleDark()">
+
+        <div class="themeButton">
+          <el-button plain @click="toggleDark()">{{ isDark ? 'Dark' : 'Light' }}
+          </el-button>
+        </div>
+        <div class="themeButton">
+          <el-button v-if="!haveUserIdRef()" type="info" plain @click="clearUser()">清除ID</el-button>
+        </div>
+        <div class="themeButton">
+          <el-button v-if="haveUserIdRef()" type="primary" plain @click="openSet()">设置ID</el-button>
+        </div>
+
+        <!-- <button class="themeButton" style="margin-top: 30px;" @click="toggleDark()">
           <i inline-block align-middle i="dark:carbon-moon carbon-sun"
             style="background-color: rgb(193, 230, 198); border-color: rgba(0, 0, 0, 0.35); color: rgb(0, 0, 0);">
           </i>
           <span class="ml-2">{{ isDark ? 'Dark' : 'Light' }}</span>
-        </button>
+        </button> -->
       </el-header>
 
       <el-main>
@@ -70,26 +85,23 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useToggle } from '@vueuse/shared';
 import { useDark } from '@vueuse/core';
-
-// 同步组件引用
-import LineChart from './components/LineChart.vue'
-import PieChart from './components/PieChart.vue'
-
-import {
-  Check,
-  Delete,
-  Edit,
-  Message,
-  Search,
-  Star,
-} from '@element-plus/icons-vue'
+import { openSet, clearUser } from './api/setUsetId'
 
 // 异步组件引用
 import { defineAsyncComponent } from 'vue'
 const FlowTable = defineAsyncComponent(() => import("./components/FlowTable.vue"));
 
+const haveUserId = (): boolean => {
+  if (localStorage.getItem('dddCashBookUserId') || 'none' === localStorage.getItem('dddCashBookUserId')) {
+    return false;
+  } else {
+    return true;
+  }
+}
+const haveUserIdRef = ref(haveUserId);
 
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance',
@@ -107,19 +119,8 @@ const toggleDark = useToggle(isDark);
 }
 
 .themeButton {
-  padding: 3px 15px;
-  background-color: #44bd87;
-  border: none;
-  outline: none;
-  color: #000;
-  margin: 0.5rem 0;
-  border-bottom: 2px solid #33a06f;
-  text-shadow: 1px 1px 1px #33a06f;
-  border-radius: 4px;
-  font-size: 1rem;
-  box-sizing: border-box;
-  vertical-align: middle;
   float: right;
+  margin: 30px 5px;
 }
 
 .el-main {

@@ -7,6 +7,9 @@ export type FlowDocument = Flow & Document;
 export class Flow extends Document {
     @Prop({ index: true, unique: true })
     id: number;
+    
+    @Prop()
+    userId: string;
 
     @Prop()
     day: Date;

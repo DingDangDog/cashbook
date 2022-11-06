@@ -23,12 +23,11 @@ export class FlowProvider {
     ) { }
 
 
-    async getPage(
-        query: FlowQuery
-    ): Promise<Page<Flow>> {
+    async getPage(query: FlowQuery): Promise<Page<Flow>> {
 
         let and = [];
 
+        and.push({ userId: { $eq: query.userId } });
         if (query.startDay) {
             and.push({ day: { $gte: query.startDay } });
         }
@@ -42,8 +41,9 @@ export class FlowProvider {
             and.push({ payType: { $eq: query.payType } });
         }
         if (query.id) {
-            and.push({ $eq: query.id });
+            and.push({ id: { $eq: query.id } });
         }
+
         if (query.name) {
             and.push({ name: { $regex: query.name } });
         }
@@ -93,9 +93,11 @@ export class FlowProvider {
     }
 
     async delete(
-        id: number
+        id: number,
+        userId: string
     ) {
-        const data = this.flowModel.deleteOne({ 'id': id });
+        const deleteO: Flow = await this.getOneByIdAndUser(id, userId);
+        const data = this.flowModel.deleteOne({ 'id': deleteO.id });
         return data;
     }
 
@@ -103,6 +105,15 @@ export class FlowProvider {
         query: FlowQuery
     ): Promise<Flow[]> {
         return await this.flowModel.find()
+            .sort({ day: -1 })
+            .exec();
+    }
+
+    async getOneByIdAndUser(
+        id: number,
+        userId: string
+    ): Promise<Flow> {
+        return await this.flowModel.findOne({ 'id': id, 'userId': userId })
             .sort({ day: -1 })
             .exec();
     }

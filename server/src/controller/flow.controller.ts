@@ -7,7 +7,8 @@ import {
     Post,
     Put,
     Delete,
-    Param
+    Param,
+    Headers
 } from '@nestjs/common';
 import { FlowProvider } from 'src/provider/flow.provider';
 import {
@@ -28,6 +29,7 @@ export class FlowController {
      */
     @Get()
     async getPage(
+        @Headers('userId') userId = 'none',
         @Query('pageNum') pageNum = 1,
         @Query('pageSize') pageSize = 10,
         @Query('startDay') startDay,
@@ -38,9 +40,16 @@ export class FlowController {
         @Query('description') description,
         @Query('id') id
     ) {
+        if ('none' === userId) {
+            return {
+                code: 333,
+                message: '查询失败，请使用合法用户！',
+            };
+        }
         const query: FlowQuery = {
             pageNum: pageNum,
             pageSize: pageSize,
+            userId: userId,
             id: id,
             startDay: startDay,
             endDay: endDay,
@@ -65,7 +74,18 @@ export class FlowController {
      * @returns 
      */
     @Post()
-    async create(@Req() req: any, @Body() createDto: CreateFlowDto) {
+    async create(
+        @Headers('userId') userId = 'none',
+        @Req() req: any,
+        @Body() createDto: CreateFlowDto
+    ) {
+        if ('none' === userId) {
+            return {
+                code: 333,
+                message: '新增失败，请使用合法用户！',
+            };
+        }
+        createDto.userId = userId;
         const data = await this.flowProvider.create(createDto);
         return {
             code: 200,
@@ -83,7 +103,18 @@ export class FlowController {
      * @returns 
      */
     @Put('/:id')
-    async update(@Param('id') id: number, @Body() updateDto: UpdateFlowDto) {
+    async update(
+        @Headers('userId') userId = 'none',
+        @Param('id') id: number,
+        @Body() updateDto: UpdateFlowDto
+    ) {
+        if ('none' === userId) {
+            return {
+                code: 333,
+                message: '更新失败，请使用合法用户！',
+            };
+        }
+        updateDto.userId = userId;
         const data = await this.flowProvider.update(id, updateDto);
         return {
             code: 200,
@@ -100,8 +131,17 @@ export class FlowController {
      * @returns 
      */
     @Delete('/:id')
-    async delete(@Param("id") id: number) {
-        const data = await this.flowProvider.delete(id);
+    async delete(
+        @Headers('userId') userId = 'none',
+        @Param("id") id: number
+    ) {
+        if (userId === 'none') {
+            return {
+                code: 333,
+                message: '删除失败，请使用合法用户！'
+            };
+        }
+        const data = await this.flowProvider.delete(id, userId);
         return {
             code: 200,
             data,
@@ -109,25 +149,25 @@ export class FlowController {
     }
 
     /**
-     * 创建一笔流水
+     * 查询全部
      * 
      * @param req 
      * @param createDto 流水信息传输实体
      * @returns 
      */
-    @Get('/getAll')
-    async getAll(@Req() query: FlowQuery) {
-        const data = await this.flowProvider.getAll(query);
-        return {
-            code: 200,
-            data: {
-                pageNum: 1,
-                pageSize: data.length,
-                totalNum: data.length,
-                dataList: data
-            },
-        };
-    }
+    // @Get('/getAll')
+    // async getAll(@Req() query: FlowQuery) {
+    //     const data = await this.flowProvider.getAll(query);
+    //     return {
+    //         code: 200,
+    //         data: {
+    //             pageNum: 1,
+    //             pageSize: data.length,
+    //             totalNum: data.length,
+    //             dataList: data
+    //         },
+    //     };
+    // }
 
 
 }

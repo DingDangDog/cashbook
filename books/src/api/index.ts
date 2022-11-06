@@ -2,6 +2,7 @@
  * 封装http请求工具
  */
 import axios from 'axios'
+import openSet from './setUsetId'
 import { ElMessage } from 'element-plus'
 
 // 创建http调用者
@@ -14,18 +15,20 @@ const $http = axios.create({
 })
 
 // 请求拦截：为请求header中增加token
-$http.interceptors.request.use(config => {
-    // baseURL/headers 属性可能不存在，若不存在设置默认值
-    config.baseURL = config.baseURL || '';
-    config.headers = config.headers || {};
-    // 如果访问登录接口，则清除当前缓存token
-    if (config.baseURL?.indexOf('/login') >= 0) {
-        localStorage.removeItem('token');
-        config.headers.token = null;
-        return config;
+$http.interceptors.request.use(async config => {
+
+    let userId: any = localStorage.getItem('dddCashBookUserId');
+
+    if (!userId) {
+        await openSet();
     }
-    if (localStorage.getItem('token')) {
-        config.headers.token = localStorage.getItem('token') || '';
+
+    // baseURL/headers 属性可能不存在，若不存在设置默认值
+    config.baseURL = config.baseURL || 'none';
+    config.headers = config.headers || {};
+
+    if (userId) {
+        config.headers.userId = userId || 'none';
     }
     return config;
 })

@@ -86,7 +86,7 @@
         <el-input-number v-model="flowRef.money" :min="0" />
       </el-form-item>
 
-      <el-form-item label="消费类型" :label-width="formLabelWidth" prop="payType">
+      <el-form-item label="支付方式" :label-width="formLabelWidth" prop="payType">
         <el-select v-model="flowRef.payType" placeholder="选择" clearable>
           <el-option v-for="item in payTypeOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
@@ -275,7 +275,6 @@ const confirmForm = async (dialgoForm: FormInstance | undefined, closeDialog: bo
     // 修改
     updateOne();
   }
-  doQuery();
   resetForm(dialgoForm, closeDialog);
 };
 
@@ -295,13 +294,15 @@ const resetForm = (formEl: FormInstance | undefined, showDialog: boolean) => {
 // 创建
 const createOne = () => {
   create({
-    day: new Date(+(flowRef.day || new Date()) + (8 * 60 * 60 * 1000)),
+    day: flowRef.day,
+    type: flowRef.type,
+    money: flowRef.money,
+    payType: flowRef.payType,
     name: flowRef.name,
     description: flowRef.description,
-    money: flowRef.money,
-    type: flowRef.type,
   }).then(res => {
     if (res.id) {
+      doQuery();
       ElMessage({
         type: 'success',
         message: '新增成功',
@@ -326,6 +327,7 @@ const updateOne = () => {
     description: flowRef.description,
   }).then(res => {
     if (res.acknowledged) {
+      doQuery();
       ElMessage({
         type: 'success',
         message: '更新成功：共更新' + res.modifiedCount + '条数据',
