@@ -39,7 +39,7 @@
     </div>
   </el-row>
 
-  <el-table v-loading="loading" :data="flowPageRef.pageData" stripe row-key="row" height="530">
+  <el-table v-loading="loading" :data="flowPageRef.pageData" stripe row-key="row" :height="tableRef.height">
     <el-table-column type="index" width="50" />
     <el-table-column prop="id" label="ID" v-if=false />
     <el-table-column prop="day" label="日期" :formatter="timeFormatter" min-width="40" />
@@ -142,6 +142,15 @@ import type { FormInstance, FormRules, UploadProps, UploadUserFile } from 'eleme
 import { getFlowPage, deleteFlow, create, update } from '../api/api';
 import type { Page } from '../types/page';
 import type { Flow, FlowQuery } from '../types/flow';
+
+
+
+// const tableRef = ref();
+// tableRef.value.height = document.documentElement.clientHeight * 0.65;
+
+const tableRef = ref({
+  'height': document.documentElement.clientHeight * 0.63
+});
 
 /*
  * 集中定义常量
@@ -282,7 +291,7 @@ const confirmForm = async (dialgoForm: FormInstance | undefined, closeDialog: bo
 const resetForm = (formEl: FormInstance | undefined, showDialog: boolean) => {
   if (!formEl) return;
   flowRef.id = undefined;
-  flowRef.day = flowRef.day;
+  // flowRef.day = flowRef.day;
   flowRef.type = undefined;
   flowRef.payType = undefined;
   flowRef.money = undefined;

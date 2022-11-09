@@ -6,13 +6,13 @@
         <div class="headerInfo">
           <a href="https://oldmoon.top/">
             <img alt="oldmoon logo" v-if="isDark ? true : false" class="logo" src="./static/images/oldmoon.dark.png"
-              width="60" height="60" />
+              :width="tableDivStyle.paddingleft.replace('px','')" :height="tableDivStyle.paddingleft.replace('px','')" />
             <img alt="oldmoon logo" v-if="isDark ? false : true" class="logo" src="./static/images/oldmoon.light.png"
-              width="60" height="60" />
+              :width="tableDivStyle.paddingleft.replace('px','')" :height="tableDivStyle.paddingleft.replace('px','')" />
           </a>
         </div>
         <div class="headerInfo">
-          <h1 style="margin-top: 20px;">DDD-CashBook</h1>
+          <h1>DDD-CashBook</h1>
         </div>
 
         <div class="themeButton">
@@ -76,8 +76,8 @@
       </el-main>
 
 
-      <el-footer height="40px">
-        Footer
+      <el-footer>
+        <a href="https://github.com/DingDangDog/ddd-cashbook">powerby ddd-cashbook</a>
       </el-footer>
 
     </el-container>
@@ -109,6 +109,16 @@ const isDark = useDark({
 
 const toggleDark = useToggle(isDark);
 
+
+const tableDivStyle = ref({
+  paddingtop: document.documentElement.clientHeight * 0.01 + `px`,
+  paddingbottom: document.documentElement.clientHeight * 0.01 + `px`,
+  paddingleft: document.documentElement.clientWidth * 0.03 + `px`,
+  paddingright: document.documentElement.clientWidth * 0.03 + `px`,
+  headerAndFooter: document.documentElement.clientWidth * 0.025 + `px`
+});
+
+
 </script>
 
 <style scoped>
@@ -118,29 +128,43 @@ const toggleDark = useToggle(isDark);
   float: left;
 }
 
+.headerInfo > .h1 {
+  margin-top: v-bind('tableDivStyle.paddingtop');
+}
+
 .themeButton {
   float: right;
   margin: 30px 5px;
 }
 
-.el-main {
+/* .el-main {
   padding-top: 5px;
   padding-bottom: 5px;
-  padding-left: 200px;
-  padding-right: 200px;
-}
+  padding-left: v-bing('mainRef.padding-left');
+  padding-right: v-bing('mainRef.padding-right');
+} */
 
 .mb-4 {
   margin: 10px;
+  padding-left: v-bind('tableDivStyle.paddingleft');
+  padding-right: v-bind('tableDivStyle.paddingright');
 }
 
 .table {
   float: none;
-  margin-top: 10px;
+  /* padding-top: v-bind('tableDivStyle.paddingtop');
+  padding-bottom: v-bind('tableDivStyle.paddingbottom'); */
+  padding-left: v-bind('tableDivStyle.paddingleft');
+  padding-right: v-bind('tableDivStyle.paddingright');
+}
+
+.el-header {
+  height: v-bind('tableDivStyle.headerAndFooter');
 }
 
 .el-footer {
   box-align: center;
   text-align: center;
+  height: v-bind('tableDivStyle.headerAndFooter');
 }
 </style>

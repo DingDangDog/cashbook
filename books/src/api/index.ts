@@ -7,7 +7,7 @@ import { ElMessage } from 'element-plus'
 
 // 创建http调用者
 const $http = axios.create({
-    baseURL: '/api',
+    baseURL: '/books/api',
     timeout: 2000,
     headers: {
         "Content-Type": "application/json;chartset=utf-8"
@@ -17,7 +17,7 @@ const $http = axios.create({
 // 请求拦截：为请求header中增加token
 $http.interceptors.request.use(async config => {
 
-    let userId: any = localStorage.getItem('dddCashBookUserId');
+    const userId: any = localStorage.getItem('dddCashBookUserId');
 
     if (!userId) {
         await openSet();

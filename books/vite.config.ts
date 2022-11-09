@@ -18,11 +18,11 @@ export default defineConfig({
     // 跨域配置
     proxy: {
       // /api相关接口跨域配置
-      '/api': {
+      '/books/api': {
         //实际请求地址
-        target: 'http://127.0.0.1:3000/api',
+        target: 'http://127.0.0.1:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, "")
+        rewrite: (path) => path.replace(/^\/books\/api/, "/api")
       },
     }
   },
