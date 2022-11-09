@@ -11,17 +11,9 @@ import { FlowProvider } from './provider/flow.provider';
   imports: [
     // 默认使用本地连接
     MongooseModule.forRoot('mongodb://127.0.0.1:27017/dddCashbook'),
-    MongooseModule.forFeature([
-      { name: Flow.name, schema: FlowSchema }
-    ])
+    MongooseModule.forFeature([{ name: Flow.name, schema: FlowSchema }]),
   ],
-  controllers: [
-    AppController,
-    FlowController
-  ],
-  providers: [
-    AppService,
-    FlowProvider
-  ]
+  controllers: [AppController, FlowController],
+  providers: [AppService, FlowProvider],
 })
-export class AppModule { }
+export class AppModule {}
