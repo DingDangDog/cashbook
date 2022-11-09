@@ -18,7 +18,7 @@ const chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 export const generateMixed = (n: number) => {
     let a = "";
     for (let i = 0; i < n; i++) {
-        a += chars[Math.ceil(Math.random() * 62)];
+        a += chars[Math.ceil(Math.random() * 61)];
     }
     return a;
 }

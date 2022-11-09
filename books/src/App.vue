@@ -16,13 +16,13 @@
         <div class="headerInfo">
           <h1>DDD-CashBook</h1>
         </div>
-        
+
         <div class="themeButton">
           <el-button plain @click="toggleDark()">{{ isDark ? 'Dark' : 'Light' }}
           </el-button>
         </div>
         <div class="themeButton">
-          个人ID:&nbsp;{{userId}}&nbsp;
+          <span v-if="!haveUserIdRef()">个人ID:&nbsp;{{ userId }}&nbsp;</span>
           <el-button v-if="!haveUserIdRef()" type="info" plain @click="clearUser()">清除ID</el-button>
         </div>
         <div class="themeButton">

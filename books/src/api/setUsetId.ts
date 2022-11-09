@@ -16,6 +16,7 @@ const setMessageNode = () => {
         [
             createVNode('li', undefined, '若已有个人ID，请输入并点击【确定】。'),
             createVNode('li', undefined, '若暂无个人ID，请点击【生成】自动生成你的个人ID。'),
+            createVNode('li', undefined, '本步骤无法跳过，点击【X】将自动生成个人ID！'),
             createVNode('li', undefined, '注意：ID一旦丢失无法找回，请妥善保管你的个人ID！')
         ]);
 }
@@ -38,7 +39,7 @@ export async function openSet() {
         // autofocus: false,
         confirmButtonText: '确定',
         cancelButtonText: '生成',
-        inputPattern: /^[a-zA-Z0-9]{6,16}$/,
+        inputPattern: /^[a-zA-Z0-9]{11}$/,
         inputErrorMessage: '请输入6-16位字符串: 只可以使用字母和数字。'
     }).then(({ value }) => {
         value = value.trim();
