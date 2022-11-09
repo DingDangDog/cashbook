@@ -1,5 +1,6 @@
 import { createVNode } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { generateMixed } from './common'
 
 // const node = () => {
 //     let nodes = [];
@@ -10,21 +11,21 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 // }
 
 const setMessageNode = () => {
-    return createVNode('p',
+    return createVNode('ul',
         undefined,
         [
-            createVNode('p', undefined, '注意: '),
-            createVNode('p', undefined, ' - 所有数据查询均需使用ID'),
-            createVNode('p', undefined, ' - ID一旦丢失无法找回')
+            createVNode('li', undefined, '若已有个人ID，请输入并点击【确定】。'),
+            createVNode('li', undefined, '若暂无个人ID，请点击【生成】自动生成你的个人ID。'),
+            createVNode('li', undefined, '注意：ID一旦丢失无法找回，请妥善保管你的个人ID！')
         ]);
 }
 
 const clearMessageNode = () => {
-    return createVNode('p',
+    return createVNode('ul',
         undefined,
         [
-            createVNode('p', undefined, '确定清除当前ID? '),
-            createVNode('p', undefined, '清除前请记住你的ID: ' + localStorage.getItem('dddCashBookUserId') + ' , 以便下次使用!'),
+            createVNode('li', undefined, '确定清除当前ID? '),
+            createVNode('li', undefined, '清除前请记住你的个人ID：' + localStorage.getItem('dddCashBookUserId') + '，以便下次使用！'),
         ]);
 }
 
@@ -36,33 +37,40 @@ export async function openSet() {
         // if you want to disable its autofocus
         // autofocus: false,
         confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        cancelButtonText: '生成',
         inputPattern: /^[a-zA-Z0-9]{6,16}$/,
         inputErrorMessage: '请输入6-16位字符串: 只可以使用字母和数字。'
     }).then(({ value }) => {
         value = value.trim();
         localStorage.setItem('dddCashBookUserId', value);
-        ElMessageBox.alert('设置成功, 请谨慎并妥善保管你的ID! ', '确认', {
-            confirmButtonText: '知道了！',
+        ElMessageBox.alert('设置成功, 感谢使用！', '确认', {
+            confirmButtonText: '不用谢~',
+            cancelButtonText: '不客气~',
             callback: () => {
                 location.reload();
             }
         });
     }).catch(() => {
-        ElMessageBox.alert('取消设置，所有功能将不可用！', '确认', {
-            confirmButtonText: '确定'
+        const generateId = generateMixed(11);
+        localStorage.setItem('dddCashBookUserId', generateId);
+        ElMessageBox.alert('已生成你的个人ID：' + generateId + '，请妥善保管！', '重要通知', {
+            confirmButtonText: '知道了！',
+            callback: () => {
+                location.reload();
+            }
         })
     });
+
 }
 
 /**
- * 设置用户ID
+ * 清除个人ID
  */
 export async function clearUser() {
-    ElMessageBox.alert(clearMessageNode, '确认', {
+    ElMessageBox.alert(clearMessageNode, '清除确认', {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
-    }).then(({ value }) => {
+    }).then(() => {
         localStorage.removeItem('dddCashBookUserId');
         ElMessage({
             type: 'success',

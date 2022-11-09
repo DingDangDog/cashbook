@@ -40,14 +40,14 @@
   </el-row>
 
   <el-table v-loading="loading" :data="flowPageRef.pageData" stripe row-key="row" :height="tableRef.height">
-    <el-table-column type="index" width="50" />
+    <el-table-column type="index" width="50" v-if="deviceAgent() === 'pc'" />
     <el-table-column prop="id" label="ID" v-if=false />
-    <el-table-column prop="day" label="日期" :formatter="timeFormatter" min-width="40" />
-    <el-table-column prop="type" label="消费类型" min-width="30" />
+    <el-table-column prop="day" label="日期" :formatter="timeFormatter" min-width="40" v-if="deviceAgent() === 'pc'" />
+    <el-table-column prop="type" label="消费类型" min-width="30" v-if="deviceAgent() === 'pc'"  />
     <el-table-column prop="money" label="金额（元）" min-width="30" />
-    <el-table-column prop="payType" label="支付方式" min-width="40" />
+    <el-table-column prop="payType" label="支付方式" min-width="40" v-if="deviceAgent() === 'pc'" />
     <el-table-column prop="name" label="名称" min-width="40" />
-    <el-table-column prop="description" label="描述" />
+    <el-table-column prop="description" label="描述" v-if="deviceAgent() === 'pc'" />
     <el-table-column label="操作" prop="id" width="110">
       <template v-slot="scop">
         <el-button type="primary" :icon="Edit" circle @click="openUpdateDialog(formTitle[1], scop.row)" />
@@ -140,6 +140,7 @@ import type { FormInstance, FormRules, UploadProps, UploadUserFile } from 'eleme
 
 // 自建库引入
 import { getFlowPage, deleteFlow, create, update } from '../api/api';
+import { deviceAgent } from '../api/common'
 import type { Page } from '../types/page';
 import type { Flow, FlowQuery } from '../types/flow';
 
@@ -174,7 +175,8 @@ const payTypeOptions = [
   { value: '微信', label: '微信' },
   { value: '京东白条', label: '京东白条' },
   { value: '刷卡', label: '刷卡' },
-  { value: '现金', label: '现金' }
+  { value: '现金', label: '现金' },
+  { value: '其他', label: '其他' }
 ];
 
 
@@ -206,7 +208,8 @@ const flow: Flow = {
 const rules = ref<FormRules>({
   day: [{ required: true, type: 'date', message: '请选择日期！', trigger: 'blur', },],
   type: [{ required: true, message: '请选择消费类型！', trigger: 'blur' },],
-  money: [{ required: true, message: '请输入金额！', trigger: 'blur' }]
+  money: [{ required: true, message: '请输入金额！', trigger: 'blur' }],
+  payType: [{ required: true, message: '请选择支付方式！', trigger: 'blur' }]
 });
 
 

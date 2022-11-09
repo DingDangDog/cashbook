@@ -6,20 +6,23 @@
         <div class="headerInfo">
           <a href="https://oldmoon.top/">
             <img alt="oldmoon logo" v-if="isDark ? true : false" class="logo" src="./static/images/oldmoon.dark.png"
-              :width="tableDivStyle.paddingleft.replace('px','')" :height="tableDivStyle.paddingleft.replace('px','')" />
+              :width="tableDivStyle.paddingleft.replace('px', '')"
+              :height="tableDivStyle.paddingleft.replace('px', '')" />
             <img alt="oldmoon logo" v-if="isDark ? false : true" class="logo" src="./static/images/oldmoon.light.png"
-              :width="tableDivStyle.paddingleft.replace('px','')" :height="tableDivStyle.paddingleft.replace('px','')" />
+              :width="tableDivStyle.paddingleft.replace('px', '')"
+              :height="tableDivStyle.paddingleft.replace('px', '')" />
           </a>
         </div>
         <div class="headerInfo">
           <h1>DDD-CashBook</h1>
         </div>
-
+        
         <div class="themeButton">
           <el-button plain @click="toggleDark()">{{ isDark ? 'Dark' : 'Light' }}
           </el-button>
         </div>
         <div class="themeButton">
+          个人ID:&nbsp;{{userId}}&nbsp;
           <el-button v-if="!haveUserIdRef()" type="info" plain @click="clearUser()">清除ID</el-button>
         </div>
         <div class="themeButton">
@@ -89,13 +92,16 @@ import { ref } from 'vue';
 import { useToggle } from '@vueuse/shared';
 import { useDark } from '@vueuse/core';
 import { openSet, clearUser } from './api/setUsetId'
+// import { deviceAgent } from './api/common'
 
 // 异步组件引用
 import { defineAsyncComponent } from 'vue'
 const FlowTable = defineAsyncComponent(() => import("./components/FlowTable.vue"));
 
+const userId = localStorage.getItem('dddCashBookUserId');
+
 const haveUserId = (): boolean => {
-  if (localStorage.getItem('dddCashBookUserId') || 'none' === localStorage.getItem('dddCashBookUserId')) {
+  if (userId || 'none' === userId) {
     return false;
   } else {
     return true;
@@ -115,9 +121,9 @@ const tableDivStyle = ref({
   paddingbottom: document.documentElement.clientHeight * 0.01 + `px`,
   paddingleft: document.documentElement.clientWidth * 0.03 + `px`,
   paddingright: document.documentElement.clientWidth * 0.03 + `px`,
-  headerAndFooter: document.documentElement.clientWidth * 0.025 + `px`
+  header: document.documentElement.clientWidth * 0.033 + `px`,
+  footer: document.documentElement.clientWidth * 0.02 + `px`
 });
-
 
 </script>
 
@@ -128,7 +134,7 @@ const tableDivStyle = ref({
   float: left;
 }
 
-.headerInfo > .h1 {
+.headerInfo>.h1 {
   margin-top: v-bind('tableDivStyle.paddingtop');
 }
 
@@ -159,12 +165,12 @@ const tableDivStyle = ref({
 }
 
 .el-header {
-  height: v-bind('tableDivStyle.headerAndFooter');
+  height: v-bind('tableDivStyle.header');
 }
 
 .el-footer {
   box-align: center;
   text-align: center;
-  height: v-bind('tableDivStyle.headerAndFooter');
+  height: v-bind('tableDivStyle.footer');
 }
 </style>
