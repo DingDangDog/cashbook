@@ -10,16 +10,26 @@ import { generateMixed } from './common'
 //     return nodes;
 // }
 
+// const setMessageNode = () => {
+//     return createVNode('ul',
+//         undefined,
+//         [
+//             createVNode('li', undefined, '若已有个人ID，请输入并点击【确定】。'),
+//             createVNode('li', undefined, '若暂无个人ID，请点击【生成】自动生成你的个人ID。'),
+//             createVNode('li', undefined, '注意：本步骤无法跳过，若取消，将自动生成个人ID！'),
+//             createVNode('li', undefined, '注意：ID一旦丢失无法找回，请妥善保管你的个人ID！')
+//         ]);
+// }
+
 const setMessageNode = () => {
-    return createVNode('ul',
-        undefined,
+    return createVNode('el-tooltip',
+        { class: "box-item", effect: "dark", content: "Top Left prompts info", placement: "top-start" },
         [
-            createVNode('li', undefined, '若已有个人ID，请输入并点击【确定】。'),
-            createVNode('li', undefined, '若暂无个人ID，请点击【生成】自动生成你的个人ID。'),
-            createVNode('li', undefined, '本步骤无法跳过，点击【X】将自动生成个人ID！'),
-            createVNode('li', undefined, '注意：ID一旦丢失无法找回，请妥善保管你的个人ID！')
+            createVNode('p', undefined, '提示')
         ]);
 }
+
+// const setMessageNode = '<el-tooltip class="box-item" effect="dark" content="Top Left prompts info" placement="top-start">提示</el-tooltip>';
 
 const clearMessageNode = () => {
     return createVNode('ul',
@@ -37,8 +47,10 @@ export async function openSet() {
     ElMessageBox.prompt(setMessageNode, '请设置你的ID', {
         // if you want to disable its autofocus
         // autofocus: false,
+        // dangerouslyUseHTMLString: true,
         confirmButtonText: '确定',
         cancelButtonText: '生成',
+        roundButton: true,
         inputPattern: /^[a-zA-Z0-9]{11}$/,
         inputErrorMessage: '请输入6-16位字符串: 只可以使用字母和数字。'
     }).then(({ value }) => {
@@ -70,7 +82,8 @@ export async function openSet() {
 export async function clearUser() {
     ElMessageBox.alert(clearMessageNode, '清除确认', {
         confirmButtonText: '确定',
-        cancelButtonText: '取消'
+        cancelButtonText: '取消',
+        showCancelButton: true
     }).then(() => {
         localStorage.removeItem('dddCashBookUserId');
         ElMessage({

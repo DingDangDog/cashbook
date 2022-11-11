@@ -80,6 +80,7 @@
 
 
       <el-footer>
+        <b>当前未测试版本，数据随时可能清楚，请知悉！</b>
         <a href="https://github.com/DingDangDog/ddd-cashbook">powerby ddd-cashbook</a>
       </el-footer>
 
