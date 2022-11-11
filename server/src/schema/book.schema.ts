@@ -1,24 +1,24 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type UserDocument = User & Document;
+export type BookDocument = Book & Document;
 
 /**
  * 用户实体
  */
 @Schema()
-export class User extends Document {
+export class Book extends Document {
   @Prop({ index: true, unique: true })
   id: number;
 
   @Prop()
-  userName: string;
+  bookName: string;
 
   @Prop({ unique: true })
-  userKey: string;
+  bookKey: string;
 
   @Prop()
   createDate: Date;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const BookSchema = SchemaFactory.createForClass(Book);

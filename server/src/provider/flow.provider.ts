@@ -17,7 +17,7 @@ export class FlowProvider {
   async getPage(query: FlowQuery): Promise<Page<Flow>> {
     const and = [];
 
-    and.push({ userId: { $eq: query.userId } });
+    and.push({ bookKey: { $eq: query.bookKey } });
     if (query.startDay) {
       and.push({ day: { $gte: query.startDay } });
     }
@@ -76,8 +76,8 @@ export class FlowProvider {
     return res;
   }
 
-  async delete(id: number, userId: number) {
-    const deleteO: Flow = await this.getOneByIdAndUser(id, userId);
+  async delete(id: number, bookKey: number) {
+    const deleteO: Flow = await this.getOneByIdAndBook(id, bookKey);
     const data = this.flowModel.deleteOne({ id: deleteO.id });
     return data;
   }
@@ -86,9 +86,9 @@ export class FlowProvider {
     return await this.flowModel.find().sort({ day: -1 }).exec();
   }
 
-  async getOneByIdAndUser(id: number, userId: number): Promise<Flow> {
+  async getOneByIdAndBook(id: number, bookKey: number): Promise<Flow> {
     return await this.flowModel
-      .findOne({ id: id, userId: userId })
+      .findOne({ id: id, bookKey: bookKey })
       .sort({ day: -1 })
       .exec();
   }

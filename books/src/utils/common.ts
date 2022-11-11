@@ -22,3 +22,28 @@ export const generateMixed = (n: number) => {
     }
     return a;
 }
+
+/**
+ * 日期格式化方法
+ * @param _row 
+ * @param _column 
+ * @param cellValue 
+ * @param _index 
+ */
+ export const timeFormatter = (_row: any, _column: Date, cellValue: string) => {
+    let format: string = 'YYYY-mm-dd'
+    const date = new Date(cellValue);
+    const dataItem = {
+      YYYY: date.getFullYear().toString(),
+      mm: (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1).toString(),
+      dd: date.getDate() < 10 ? '0' + date.getDate() : date.getDate().toString(),
+      // 'HH': date.getHours().toString(),
+      // 'Mm': date.getMinutes().toString(),
+      // 'ss': date.getSeconds().toString(),
+    };
+    format = format.replace('YYYY', dataItem.YYYY);
+    format = format.replace('mm', dataItem.mm);
+    format = format.replace('dd', dataItem.dd);
+    return format
+  }
+  

@@ -1,6 +1,6 @@
 import $http from './index'
 import type { Page } from '../types/page';
-import type { Flow, FlowQuery, CreateFlowDto, UpdateFlowDto } from '../types/flow';
+import type { Flow, FlowQuery, CreateFlowDto, UpdateFlowDto } from '../types/model/flow';
 import type { UpdateResult, DeleteResult } from '../types/mongoose';
 
 /**
@@ -24,7 +24,7 @@ export function getFlowPage(query: FlowQuery): Promise<Page<Flow>> {
  * 新增流水
  * @returns Page<Flow>
  */
-export function create(createDto: CreateFlowDto): Promise<Flow> {
+export function createFlow(createDto: CreateFlowDto): Promise<Flow> {
     return $http({ url: "/flow", method: "post", data: createDto })
 }
 

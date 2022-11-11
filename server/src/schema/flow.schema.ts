@@ -12,7 +12,7 @@ export class Flow extends Document {
   id: number;
 
   @Prop()
-  userId: number;
+  bookKey: string;
 
   @Prop()
   day: Date;

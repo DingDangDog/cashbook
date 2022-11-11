@@ -21,11 +21,12 @@ export class FlowController {
   /**
    * 创建一笔流水
    *
+   * @param bookKey 用户钥匙
    * @returns 分页数据
    */
   @Get()
   async getPage(
-    @Headers('userId') userId = -1,
+    @Headers('bookKey') bookKey = 'none',
     @Query('pageNum') pageNum = 1,
     @Query('pageSize') pageSize = 10,
     @Query('startDay') startDay,
@@ -36,16 +37,16 @@ export class FlowController {
     @Query('description') description,
     @Query('id') id,
   ) {
-    if (-1 === userId) {
+    if ('none' === bookKey) {
       return {
         code: 333,
-        message: '查询失败，请使用合法用户！',
+        message: '查询失败，请使用合法钥匙！',
       };
     }
     const query: FlowQuery = {
       pageNum: pageNum,
       pageSize: pageSize,
-      userId: userId,
+      bookKey: bookKey,
       id: id,
       startDay: startDay,
       endDay: endDay,
@@ -66,21 +67,22 @@ export class FlowController {
    *
    * @param req
    * @param createDto 流水信息传输实体
+   * @param bookKey 用户钥匙
    * @returns
    */
   @Post()
   async create(
-    @Headers('userId') userId = -1,
+    @Headers('bookKey') bookKey = 'none',
     @Req() req: any,
     @Body() createDto: CreateFlowDto,
   ) {
-    if (-1 === userId) {
+    if ('none' === bookKey) {
       return {
         code: 333,
-        message: '新增失败，请使用合法用户！',
+        message: '新增失败，请使用合法钥匙！',
       };
     }
-    createDto.userId = userId;
+    createDto.bookKey = bookKey;
     const data = await this.flowProvider.create(createDto);
     return {
       code: 200,
@@ -93,21 +95,22 @@ export class FlowController {
    *
    * @param req
    * @param updateDto 流水信息传输实体
+   * @param bookKey 用户钥匙
    * @returns
    */
   @Put('/:id')
   async update(
-    @Headers('userId') userId = -1,
+    @Headers('bookKey') bookKey = 'none',
     @Param('id') id: number,
     @Body() updateDto: UpdateFlowDto,
   ) {
-    if (-1 === userId) {
+    if ('none' === bookKey) {
       return {
         code: 333,
-        message: '更新失败，请使用合法用户！',
+        message: '更新失败，请使用合法钥匙！',
       };
     }
-    updateDto.userId = userId;
+    updateDto.bookKey = bookKey;
     const data = await this.flowProvider.update(id, updateDto);
     return {
       code: 200,
@@ -119,17 +122,18 @@ export class FlowController {
    * 删除一笔流水
    *
    * @param id 流水id
+   * @param bookKey 用户钥匙
    * @returns
    */
   @Delete('/:id')
-  async delete(@Headers('userId') userId = -1, @Param('id') id: number) {
-    if (userId === -1) {
+  async delete(@Headers('bookKey') bookKey = -1, @Param('id') id: number) {
+    if (bookKey === -1) {
       return {
         code: 333,
-        message: '删除失败，请使用合法用户！',
+        message: '删除失败，请使用合法钥匙！',
       };
     }
-    const data = await this.flowProvider.delete(id, userId);
+    const data = await this.flowProvider.delete(id, bookKey);
     return {
       code: 200,
       data,

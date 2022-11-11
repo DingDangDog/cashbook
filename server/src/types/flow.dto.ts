@@ -2,7 +2,7 @@
  * 创建流水的传输实体
  */
 export class CreateFlowDto {
-  userId: number;
+  bookKey: string;
   day: Date;
   name: string;
   type: string;
@@ -15,7 +15,7 @@ export class CreateFlowDto {
  * 更新流水的传输实体
  */
 export class UpdateFlowDto {
-  userId: number;
+  bookKey: string;
   day: Date;
   type: string;
   money: number;
@@ -25,7 +25,7 @@ export class UpdateFlowDto {
 }
 
 export class FlowQuery {
-  userId: number;
+  bookKey: string;
   pageNum = 1;
   pageSize = 10;
   id?: number;

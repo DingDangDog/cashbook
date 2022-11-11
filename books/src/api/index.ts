@@ -2,7 +2,7 @@
  * 封装http请求工具
  */
 import axios from 'axios'
-import openSet from './setUsetId'
+import openSet from '../utils/setKey'
 import { ElMessage } from 'element-plus'
 
 // 创建http调用者
@@ -17,9 +17,9 @@ const $http = axios.create({
 // 请求拦截：为请求header中增加token
 $http.interceptors.request.use(async config => {
 
-    const userId: any = localStorage.getItem('dddCashBookUserId');
+    const bookKey: any = localStorage.getItem('bookKey');
 
-    if (!userId) {
+    if (!bookKey && !($http.getUri.toString().indexOf('createUser') > 0)) {
         await openSet();
     }
 
@@ -27,8 +27,8 @@ $http.interceptors.request.use(async config => {
     config.baseURL = config.baseURL || 'none';
     config.headers = config.headers || {};
 
-    if (userId) {
-        config.headers.userId = userId || 'none';
+    if (bookKey) {
+        config.headers.bookKey = bookKey || 'none';
     }
     return config;
 })

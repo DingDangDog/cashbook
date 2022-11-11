@@ -139,10 +139,10 @@ import { Search, Delete, Edit } from '@element-plus/icons-vue';
 import type { FormInstance, FormRules, UploadProps, UploadUserFile } from 'element-plus'
 
 // 自建库引入
-import { getFlowPage, deleteFlow, create, update } from '../api/api';
-import { deviceAgent } from '../api/common'
+import { getFlowPage, deleteFlow, createFlow, update } from '../api/api.flow'
+import { deviceAgent, timeFormatter } from '../utils/common'
 import type { Page } from '../types/page';
-import type { Flow, FlowQuery } from '../types/flow';
+import type { Flow, FlowQuery } from '../types/model/flow';
 
 
 
@@ -178,7 +178,6 @@ const payTypeOptions = [
   { value: '现金', label: '现金' },
   { value: '其他', label: '其他' }
 ];
-
 
 const query: FlowQuery = {
   pageNum: 1,
@@ -305,7 +304,7 @@ const resetForm = (formEl: FormInstance | undefined, showDialog: boolean) => {
 
 // 创建
 const createOne = () => {
-  create({
+  createFlow({
     day: flowRef.day,
     type: flowRef.type,
     money: flowRef.money,
@@ -408,30 +407,6 @@ const changeDate = () => {
   flowRef.day = new Date(+(flowRef.day || new Date()) + (8 * 60 * 60 * 1000));
 };
 
-/**
- * 日期格式化方法
- * @param row 
- * @param column 
- * @param cellValue 
- * @param index 
- */
-const timeFormatter = (row: any, column: Date, cellValue: string, index: number) => {
-  let format: string = 'YYYY-mm-dd'
-  let date = new Date(cellValue);
-  const dataItem = {
-    YYYY: date.getFullYear().toString(),
-    mm: (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1).toString(),
-    dd: date.getDate() < 10 ? '0' + date.getDate() : date.getDate().toString(),
-    // 'HH': date.getHours().toString(),
-    // 'Mm': date.getMinutes().toString(),
-    // 'ss': date.getSeconds().toString(),
-  };
-  format = format.replace('YYYY', dataItem.YYYY);
-  format = format.replace('mm', dataItem.mm);
-  format = format.replace('dd', dataItem.dd);
-  return format
-}
-
 
 /**
  * 文件上传相关代码
@@ -453,7 +428,7 @@ const handleExceed: UploadProps['onExceed'] = (files, uploadFiles) => {
   )
 }
 
-const beforeRemove: UploadProps['beforeRemove'] = (uploadFile, uploadFiles) => {
+const beforeRemove: UploadProps['beforeRemove'] = (uploadFile) => {
   return ElMessageBox.confirm(
     `Cancel the transfert of ${uploadFile.name} ?`
   ).then(

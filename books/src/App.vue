@@ -22,11 +22,11 @@
           </el-button>
         </div>
         <div class="themeButton">
-          <span v-if="!haveUserIdRef()">个人ID:&nbsp;{{ userId }}&nbsp;</span>
-          <el-button v-if="!haveUserIdRef()" type="info" plain @click="clearUser()">清除ID</el-button>
+          <span v-if="!haveUserIdRef()">账本：{{ bookName }}&nbsp;</span>
+          <el-button v-if="!haveUserIdRef()" type="info" plain @click="clearUser()">关闭账本</el-button>
         </div>
         <div class="themeButton">
-          <el-button v-if="haveUserIdRef()" type="primary" plain @click="openSet()">设置ID</el-button>
+          <el-button v-if="haveUserIdRef()" type="primary" plain @click="openSet()">打卡账本</el-button>
         </div>
 
         <!-- <button class="themeButton" style="margin-top: 30px;" @click="toggleDark()">
@@ -80,7 +80,7 @@
 
 
       <el-footer>
-        <b>当前未测试版本，数据随时可能清楚，请知悉！</b>
+        <b>当前为内测版本，数据随时可能清除，请知悉！</b><br/>
         <a href="https://github.com/DingDangDog/ddd-cashbook">powerby ddd-cashbook</a>
       </el-footer>
 
@@ -92,17 +92,17 @@
 import { ref } from 'vue';
 import { useToggle } from '@vueuse/shared';
 import { useDark } from '@vueuse/core';
-import { openSet, clearUser } from './api/setUsetId'
+import { openSet, clearUser } from './utils/setKey'
 // import { deviceAgent } from './api/common'
 
 // 异步组件引用
 import { defineAsyncComponent } from 'vue'
 const FlowTable = defineAsyncComponent(() => import("./components/FlowTable.vue"));
 
-const userId = localStorage.getItem('dddCashBookUserId');
+const bookName = localStorage.getItem('bookName');
 
 const haveUserId = (): boolean => {
-  if (userId || 'none' === userId) {
+  if (bookName || 'none' === bookName) {
     return false;
   } else {
     return true;
