@@ -35,6 +35,7 @@ export async function openSet() {
                 ElMessageBox.alert('非常感谢您的使用！', '账本（' + book.bookName + '）打开成功', {
                     confirmButtonText: '不用谢~',
                     cancelButtonText: '不客气~',
+                    showCancelButton: true,
                     callback: () => {
                         location.reload();
                     }
@@ -44,6 +45,7 @@ export async function openSet() {
                 ElMessageBox.alert('账本不存在，请先创建！', '账本打开失败', {
                     confirmButtonText: '去创建',
                     cancelButtonText: '去重试',
+                    showCancelButton: true
                 }).then(() => {
                     // 2.1.2.1、去创建
                     register();
@@ -82,6 +84,7 @@ export async function create(bookName: string, bookKey: string) {
             ElMessageBox.alert('请重试或提交issue反馈！', '账本创建失败', {
                 confirmButtonText: '确定',
                 cancelButtonText: '反馈',
+                showCancelButton: true,
                 callback: () => {
                     location.reload();
                 }
