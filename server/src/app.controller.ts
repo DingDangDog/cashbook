@@ -9,7 +9,7 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-  
+
   /** 创建helloDDD **/
   @Get('helloDDD')
   getHelloDDD(): string {

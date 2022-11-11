@@ -3,32 +3,34 @@ import { Document } from 'mongoose';
 
 export type FlowDocument = Flow & Document;
 
+/**
+ * 流水账实体
+ */
 @Schema()
 export class Flow extends Document {
-    @Prop({ index: true, unique: true })
-    id: number;
-    
-    @Prop()
-    userId: string;
+  @Prop({ index: true, unique: true })
+  id: number;
 
-    @Prop()
-    day: Date;
+  @Prop()
+  userId: number;
 
-    @Prop()
-    type: string;
+  @Prop()
+  day: Date;
 
-    @Prop()
-    money: number;
+  @Prop()
+  type: string;
 
-    @Prop()
-    payType: string;
+  @Prop()
+  money: number;
 
-    @Prop()
-    name: string;
+  @Prop()
+  payType: string;
 
-    @Prop()
-    description: string;
+  @Prop()
+  name: string;
 
+  @Prop()
+  description: string;
 }
 
 export const FlowSchema = SchemaFactory.createForClass(Flow);
