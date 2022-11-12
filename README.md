@@ -10,6 +10,7 @@ DDD记账本
   <img src="https://img.shields.io/github/issues/DingDangDog/ddd-cashbook?color=important" />
   <img src="https://img.shields.io/badge/license-MIT-yellow.svg" />
 </p>
+
 ## 概念说明
 
 - **账本**：本系统的用户级概念，必须打开（登录）账本才能记录、查看流水。
