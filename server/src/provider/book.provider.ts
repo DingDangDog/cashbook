@@ -43,4 +43,8 @@ export class BookProvider {
     this.idLock = false;
     return res;
   }
+
+  async getAll(bookKey: string): Promise<Book[]> {
+    return await this.bookModel.find({ bookKey: bookKey }).exec();
+  }
 }

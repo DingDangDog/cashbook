@@ -2,6 +2,7 @@ export interface Flow {
     id?: number;
     day?: Date;
     type?: string;
+    bookKey?: string;
     payType?: string;
     money?: number;
     name?: string;

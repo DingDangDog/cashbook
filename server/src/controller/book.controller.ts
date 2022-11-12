@@ -36,4 +36,22 @@ export class BookController {
       data,
     };
   }
+
+  /**
+   * 查询全部
+   */
+  @Get('/getAll')
+  async getAll(@Param('bookKey') bookKey = 'none') {
+    if (bookKey === 'none') {
+      return {
+        code: 333,
+        message: '数据获取失败，请使用合法钥匙！',
+      };
+    }
+    const data = await this.bookProvider.getAll(bookKey);
+    return {
+      code: 200,
+      data,
+    };
+  }
 }

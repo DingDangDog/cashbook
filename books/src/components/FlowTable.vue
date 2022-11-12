@@ -37,13 +37,16 @@
     <div class="queryParam">
       <el-button type="primary" @click="dialogUpdateVisible = true">导入</el-button>
     </div>
+    <div class="queryParam">
+      <el-button type="success" @click="exportFlows()">导出全部</el-button>
+    </div>
   </el-row>
 
   <el-table v-loading="loading" :data="flowPageRef.pageData" stripe row-key="row" :height="tableRef.height">
     <el-table-column type="index" width="50" v-if="deviceAgent() === 'pc'" />
     <el-table-column prop="id" label="ID" v-if=false />
     <el-table-column prop="day" label="日期" :formatter="timeFormatter" min-width="40" v-if="deviceAgent() === 'pc'" />
-    <el-table-column prop="type" label="消费类型" min-width="30" v-if="deviceAgent() === 'pc'"  />
+    <el-table-column prop="type" label="消费类型" min-width="30" v-if="deviceAgent() === 'pc'" />
     <el-table-column prop="money" label="金额（元）" min-width="30" />
     <el-table-column prop="payType" label="支付方式" min-width="40" v-if="deviceAgent() === 'pc'" />
     <el-table-column prop="name" label="名称" min-width="40" />
@@ -117,13 +120,19 @@
   </el-dialog>
 
   <el-dialog v-model="dialogUpdateVisible" title="文件上传">
-    <el-upload v-model:file-list="fileList" class="upload-demo"
-      action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" multiple :on-preview="handlePreview"
-      :on-remove="handleRemove" :before-remove="beforeRemove" :limit="3" :on-exceed="handleExceed">
-      <el-button type="primary">选择文件</el-button>
+    <!-- <el-upload submit="submitExcel()" :auto-upload="false">
+      <el-button type="primary">导入Excel文件</el-button>
       <template #tip>
         <div class="el-upload__tip">
           仅支持上传excel文件
+        </div>
+      </template>
+    </el-upload> -->
+    <el-upload :auto-upload="false" :on-change="readJsonInfo" v-model:file-list='fileList'>
+      <el-button type="primary">导入Json文件</el-button>
+      <template #tip>
+        <div class="el-upload__tip">
+          仅支持上传Json文件
         </div>
       </template>
     </el-upload>
@@ -136,11 +145,12 @@
 import { ref, onMounted, reactive } from 'vue';
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { Search, Delete, Edit } from '@element-plus/icons-vue';
-import type { FormInstance, FormRules, UploadProps, UploadUserFile } from 'element-plus'
+import type { FormInstance, FormRules, UploadFile, UploadUserFile } from 'element-plus'
 
-// 自建库引入
-import { getFlowPage, deleteFlow, createFlow, update } from '../api/api.flow'
+// 私有引入
+import { getFlowPage, deleteFlow, createFlow, update, getAll, importFlows } from '../api/api.flow'
 import { deviceAgent, timeFormatter } from '../utils/common'
+import { exportJson } from '../utils/fileUtils'
 import type { Page } from '../types/page';
 import type { Flow, FlowQuery } from '../types/model/flow';
 
@@ -411,31 +421,55 @@ const changeDate = () => {
 /**
  * 文件上传相关代码
  */
-const fileList = ref<UploadUserFile[]>([])
+const fileList = ref<UploadUserFile[]>([]);
 
-const handleRemove: UploadProps['onRemove'] = (file, uploadFiles) => {
-  console.log(file, uploadFiles)
+const importFlowList: any = [];
+// 读取json文件并导入
+const readJsonInfo = (flie: UploadFile) => {
+  flie.raw?.text()
+    .then((data) => {
+      const jsonFlows: Flow[] = JSON.parse(data);
+      jsonFlows.forEach((flow) => {
+        // 数据转换
+        importFlowList.push({
+          id: flow.id,
+          day: new Date(flow.day || new Date()),
+          type: flow.type,
+          bookKey: bookKey,
+          payType: flow.payType,
+          money: flow.money,
+          name: flow.name,
+          description: flow.description,
+        })
+      })
+      importFlows(importFlowList).then(() => {
+        ElMessageBox.alert('', '导入成功', {
+          confirmButtonText: '确定',
+          callback: () => {
+            location.reload();
+          }
+        })
+      }).catch(() => {
+        ElMessage.error('导入失败，请重试！')
+      })
+      //console.log(importFlowList);
+    })
 }
 
-const handlePreview: UploadProps['onPreview'] = (uploadFile) => {
-  console.log(uploadFile)
+
+const bookName = localStorage.getItem('bookName');
+const bookKey = localStorage.getItem('bookKey');
+
+const exportFlows = () => {
+  getAll(bookKey || 'none')
+    .then((data) => {
+      const fileName = bookName + '-' + (new Date().getTime()) + '.json';
+      exportJson(fileName, JSON.stringify(data));
+    }).catch(() => {
+      ElMessage.error('数据获取出错，无法导出！')
+    })
 }
 
-const handleExceed: UploadProps['onExceed'] = (files, uploadFiles) => {
-  ElMessage.warning(
-    `The limit is 3, you selected ${files.length} files this time, add up to ${files.length + uploadFiles.length
-    } totally`
-  )
-}
-
-const beforeRemove: UploadProps['beforeRemove'] = (uploadFile) => {
-  return ElMessageBox.confirm(
-    `Cancel the transfert of ${uploadFile.name} ?`
-  ).then(
-    () => true,
-    () => false
-  )
-}
 // ref(1)
 
 // 将需要对外暴露的方法和对象添加到这里

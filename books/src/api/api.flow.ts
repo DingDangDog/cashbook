@@ -4,11 +4,11 @@ import type { Flow, FlowQuery, CreateFlowDto, UpdateFlowDto } from '../types/mod
 import type { UpdateResult, DeleteResult } from '../types/mongoose';
 
 /**
- * 查询流水
+ * 查询全部流水
  * @returns FlowPage
  */
-export function getAll(): Promise<Flow> {
-    return $http({ url: "/flow/getAll", method: "get" })
+export function getAll(bookKey: string): Promise<Flow[]> {
+    return $http({ url: "/flow/getAll", method: "get", params: { bookKey: bookKey } })
 }
 
 /**
@@ -44,4 +44,13 @@ export function update(id: number, updateDto: UpdateFlowDto): Promise<UpdateResu
  */
 export function deleteFlow(id: number): Promise<DeleteResult> {
     return $http({ url: "/flow/" + id, method: "delete" })
+}
+
+/**
+ * 批量导入流水
+ * @param flows 
+ * @returns 
+ */
+export function importFlows(flows: Flow[]) {
+    return $http({ url: "/flow/importFlows", method: "post", data: flows })
 }

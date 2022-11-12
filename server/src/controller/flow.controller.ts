@@ -11,6 +11,7 @@ import {
   Headers,
 } from '@nestjs/common';
 import { FlowProvider } from 'src/provider/flow.provider';
+import { Flow } from 'src/schema/flow.schema';
 
 import { CreateFlowDto, UpdateFlowDto, FlowQuery } from 'src/types/flow.dto';
 
@@ -126,8 +127,8 @@ export class FlowController {
    * @returns
    */
   @Delete('/:id')
-  async delete(@Headers('bookKey') bookKey = -1, @Param('id') id: number) {
-    if (bookKey === -1) {
+  async delete(@Headers('bookKey') bookKey = 'none', @Param('id') id: number) {
+    if (bookKey === 'none') {
       return {
         code: 333,
         message: '删除失败，请使用合法钥匙！',
@@ -142,22 +143,42 @@ export class FlowController {
 
   /**
    * 查询全部
+   */
+  @Get('/getAll')
+  async getAll(@Query('bookKey') bookKey = 'none') {
+    if (bookKey === 'none') {
+      return {
+        code: 333,
+        message: '数据获取失败，请使用合法钥匙！',
+      };
+    }
+    const data = await this.flowProvider.getAll(bookKey);
+    return {
+      code: 200,
+      data,
+    };
+  }
+
+  /**
+   * 批量导入
    *
-   * @param req
-   * @param createDto 流水信息传输实体
    * @returns
    */
-  // @Get('/getAll')
-  // async getAll(@Req() query: FlowQuery) {
-  //     const data = await this.flowProvider.getAll(query)
-  //     return {
-  //         code: 200,
-  //         data: {
-  //             pageNum: 1,
-  //             pageSize: data.length,
-  //             totalNum: data.length,
-  //             dataList: data
-  //         },
-  //     }
-  // }
+  @Post('/importFlows')
+  async importFlows(
+    @Headers('bookKey') bookKey = 'none',
+    @Body() flows: Flow[],
+  ) {
+    if ('none' === bookKey) {
+      return {
+        code: 333,
+        message: '导入失败，请使用合法钥匙！',
+      };
+    }
+    const data = await this.flowProvider.importFlows(flows);
+    return {
+      code: 200,
+      data,
+    };
+  }
 }

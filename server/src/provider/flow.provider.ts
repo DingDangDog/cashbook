@@ -76,17 +76,17 @@ export class FlowProvider {
     return res;
   }
 
-  async delete(id: number, bookKey: number) {
+  async delete(id: number, bookKey: string) {
     const deleteO: Flow = await this.getOneByIdAndBook(id, bookKey);
     const data = this.flowModel.deleteOne({ id: deleteO.id });
     return data;
   }
 
-  async getAll(query: FlowQuery): Promise<Flow[]> {
-    return await this.flowModel.find().sort({ day: -1 }).exec();
+  async getAll(bookKey: string): Promise<Flow[]> {
+    return await this.flowModel.find({ bookKey: bookKey }).exec();
   }
 
-  async getOneByIdAndBook(id: number, bookKey: number): Promise<Flow> {
+  async getOneByIdAndBook(id: number, bookKey: string): Promise<Flow> {
     return await this.flowModel
       .findOne({ id: id, bookKey: bookKey })
       .sort({ day: -1 })
@@ -109,5 +109,9 @@ export class FlowProvider {
     }
     this.idLock = false;
     return res;
+  }
+
+  async importFlows(flows: Flow[]) {
+    return await this.flowModel.insertMany(flows);
   }
 }
