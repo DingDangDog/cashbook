@@ -81,7 +81,7 @@
 
       <el-footer>
         <b>当前为内测版本，数据随时可能清除，请知悉！</b><br/>
-        <a href="https://github.com/DingDangDog/ddd-cashbook">powerby ddd-cashbook</a>
+        <p>Powered by <a href="https://github.com/DingDangDog/ddd-cashbook">ddd-cashbook</a></p>
       </el-footer>
 
     </el-container>
