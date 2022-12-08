@@ -39,7 +39,7 @@
 
       <el-main>
         <el-row class="mb-4">
-          <el-button round>Round</el-button>
+          <el-button round @click="showChart(1, '每日消费曲线')">每日消费曲线</el-button>
           <el-button type="primary" round>Primary</el-button>
           <el-button type="success" round>Success</el-button>
           <el-button type="info" round>Info</el-button>
@@ -85,6 +85,11 @@
       </el-footer>
 
     </el-container>
+
+  <el-dialog v-model="chartDialog.chartDiaLogShow" :title="chartDialog.chartDiaLogTitle">
+    <div v-if="(chartDialog.showChartNum == 1)"><DailyLineChart/></div>
+  </el-dialog>
+
   </div>
 </template>
 
@@ -98,7 +103,9 @@ import { openSet, clearUser } from './utils/setKey'
 // 异步组件引用
 import { defineAsyncComponent } from 'vue'
 const FlowTable = defineAsyncComponent(() => import("./components/FlowTable.vue"));
+const DailyLineChart = defineAsyncComponent(() => import("./components/DailyLineChart.vue"));
 
+// 设置账本
 const bookName = localStorage.getItem('bookName');
 
 const haveUserId = (): boolean => {
@@ -110,13 +117,27 @@ const haveUserId = (): boolean => {
 }
 const haveUserIdRef = ref(haveUserId);
 
+// 设置主题
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance',
 })
 
 const toggleDark = useToggle(isDark);
 
+// 图表控制
+const chartDialog = ref({
+  chartDiaLogShow: false,
+  chartDiaLogTitle: '每日消费曲线',
+  showChartNum: 1,
+})
 
+const showChart = (showChartNum: number, chartDiaLogTitle: string) => {
+  chartDialog.value.chartDiaLogShow = true;
+  chartDialog.value.chartDiaLogTitle = chartDiaLogTitle;
+  chartDialog.value.showChartNum = showChartNum;
+}
+
+// 动态表格样式
 const tableDivStyle = ref({
   paddingtop: document.documentElement.clientHeight * 0.01 + `px`,
   paddingbottom: document.documentElement.clientHeight * 0.01 + `px`,

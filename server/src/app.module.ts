@@ -4,12 +4,15 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { Flow, FlowSchema } from './schema/flow.schema';
-import { Book, BookSchema } from './schema/book.schema';
-
 import { FlowController } from './controller/flow.controller';
 import { FlowProvider } from './provider/flow.provider';
+
+import { Book, BookSchema } from './schema/book.schema';
 import { BookController } from './controller/book.controller';
 import { BookProvider } from './provider/book.provider';
+
+import { AnalysisController } from './controller/analysis.controller';
+import { AnalysisProvider } from './provider/analysis.provider';
 
 @Module({
   imports: [
@@ -20,7 +23,12 @@ import { BookProvider } from './provider/book.provider';
       { name: Book.name, schema: BookSchema },
     ]),
   ],
-  controllers: [AppController, FlowController, BookController],
-  providers: [AppService, FlowProvider, BookProvider],
+  controllers: [
+    AppController,
+    FlowController,
+    BookController,
+    AnalysisController,
+  ],
+  providers: [AppService, FlowProvider, BookProvider, AnalysisProvider],
 })
 export class AppModule {}

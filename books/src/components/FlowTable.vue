@@ -269,6 +269,12 @@ const pageSizeChange = (pageSize: number) => {
 
 // 执行分页数据查询
 const doQuery = () => {
+  if (queryRef.value.startDay) {
+    queryRef.value.startDay = new Date(+(queryRef.value.startDay || new Date()) + (8 * 60 * 60 * 1000));
+  }
+  if (queryRef.value.endDay) {
+    queryRef.value.endDay = new Date(+(queryRef.value.endDay || new Date()) + (8 * 60 * 60 * 1000));
+  }
   getFlowPage(queryRef.value).then(res => {
     flowPageRef.value = res;
     // console.log(JSON.stringify(flowPage) + "doQuery");
