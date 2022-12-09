@@ -13,11 +13,12 @@ import { BookProvider } from './provider/book.provider';
 
 import { AnalysisController } from './controller/analysis.controller';
 import { AnalysisProvider } from './provider/analysis.provider';
+import { config } from './config';
 
 @Module({
   imports: [
     // 默认使用本地连接
-    MongooseModule.forRoot('mongodb://127.0.0.1:27017/dddCashbook'),
+    MongooseModule.forRoot(config.mongoUrl),
     MongooseModule.forFeature([
       { name: Flow.name, schema: FlowSchema },
       { name: Book.name, schema: BookSchema },
