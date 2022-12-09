@@ -11,5 +11,6 @@ export const loadConfig = (key: string, defaultValue?: any) => {
       .map((x) => x.toUpperCase())
       .join('_');
 
+  console.log(envKey + ':' + process.env[envKey]);
   return process.env[envKey] || defaultValue;
 };
