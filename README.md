@@ -1,5 +1,5 @@
 <div align="center">
-<h1>ddd-cashbook</h1>
+<h1>cashbook</h1>
 </div>
 <p align="center">
 DDD记账本
