@@ -1,0 +1,28 @@
+version: "3"
+
+# cashbook和mongo容器一键部署使用，注意修改mongo帐号和密码
+services:
+  cashbook:
+    image: dingdangdog/cashbook:latest
+    restart: always
+    environment:
+      TZ: "Asia/Shanghai"
+      # cashbook使用的mongodb地址，默认是我本地的地址，其他人使用请自行修改
+      CASHBOOK_MONGODB_URL: "mongodb://localmongo:localmongo@mongo:27017/cashbook?authSource=admin"
+    ports:
+      - 80:80
+  mongo:
+    image: mongo:4.4.16
+    restart: always
+    environment:
+      TZ: "Asia/Shanghai"
+      # mongo帐号
+      MONGO_INITDB_ROOT_USERNAME: localmongo
+      # mongo密码，建议修改！
+      MONGO_INITDB_ROOT_PASSWORD: localmongo
+    volumes:
+      # mongoDB 数据存放地址，默认是我开发机配置，按需修改。
+      - E:/docker-mongo/data:/data/db
+    # 如需禁止外部访问数据库，请将下面两行删除
+    ports:
+      - 27017:27017

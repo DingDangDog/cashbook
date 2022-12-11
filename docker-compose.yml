@@ -1,0 +1,13 @@
+version: "3"
+
+# 单独编排cashbook容器，mongo需要独立配置URL
+services:
+  cashbook:
+    image: dingdangdog/cashbook:latest
+    restart: always
+    environment:
+      TZ: "Asia/Shanghai"
+      # cashbook使用的mongodb地址，默认是我本地的地址，其他人使用请自行修改
+      CASHBOOK_MONGODB_URL: "mongodb://localmongo:localmongo@172.20.96.1:27017/cashbook?authSource=admin"
+    ports:
+      - 80:80
