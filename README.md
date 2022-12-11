@@ -39,6 +39,8 @@ DDD记账本
 - [ ]  流水统计图表
 - [ ]  流水分类统计
 - [x]  初步实现docker部署
+- [x]  前后端docker镜像合并部署
+- [x]  增加docker-compose容器编排
 
 
 ## 演示系统
@@ -51,27 +53,74 @@ DDD记账本
 
 ### Windows
 
-> 请拉取源码自行编译运行，后续可能会简化
+> 建议使用docker部署
+> 
+> 若不想用docker，可以参考[cashbook-0.0.1-releases](https://github.com/DingDangDog/cashbook/releases/tag/v0.0.1)，但其较为麻烦，需要提前准备好MongoDB和Node环境，不推荐😑
+> 
+> 或请拉取源码自行编译运行。
+> 
+> PS：等我变得更厉害时再来简化吧😣
 
 ### Linux
 
-> 请拉取源码自行打包部署，后续可能会简化
+> 建议使用docker部署
+> 
+> 若不想使用docker，请拉取源码自行打包部署，后续可能会简化
+> 
+> PS：等我变得更厉害时再来简化吧😣
 
 ### Docker
 
-> 初步实现docker镜像，后续可能会简化
+> 请先安装docker再进行以下操作
 
-- books：https://hub.docker.com/repository/docker/dingdangdog/cashbook-books
+#### 自动部署
 
-```shell
-docker pull dingdangdog/cashbook-books
+> 请先安装`docker-compose`工具
+
+1. 创建本地文件夹
+2. 创建`docker-compose.yml`文件，并填入以下内容
+    ```yaml
+    version: "3"
+    
+    # 单独编排cashbook容器，mongo需要独立配置URL
+    services:
+      cashbook:
+        image: dingdangdog/cashbook:latest
+        restart: always
+        environment:
+          TZ: "Asia/Shanghai"
+          # cashbook使用的mongodb地址，默认是我本地的地址，其他人使用请自行修改
+          CASHBOOK_MONGODB_URL: "mongodb://localmongo:localmongo@172.20.96.1:27017/cashbook?authSource=admin"
+        ports:
+          - 80:80
+    ```
+3. 在当前文件夹运行命令`docker-compose up -d`，后台运行docker-compose
+
+**拓展：源码根目录有两个编写好的yml文件，可以下载使用**
+
+- docker-compose.yml：单独编排cashbook，需要配置其中的MongoDBurl，即`CASHBOOK_MONGODB_URL`。
+- docker-compose+mongo.yml：将cashbook和mongo一起编排，同时安装，若不具备mongo环境，可以使用此文件。注意使用前需要将文件名改为`docker-compose.yml`
+
+#### 手动部署
+
+> 以下操作建议在已经具备有MongoDB环境的情况下进行
+
+1. 拉取docker镜像：
+
+```docker
+docker pull dingdangdog/cashbook:latest
 ```
 
-- server：https://hub.docker.com/repository/docker/dingdangdog/cashbook-server
+2. 启动docker容器
 
 ```shell
-docker pull dingdangdog/cashbook-server
+# 注意修改其中的MongoDB地址
+docker run -p 16001:80 --name cashbook -e CASHBOOK_MONGODB_URL=mongodb://username:password@127.0.0.1:27017/cashbook?authSource=admin -d dingdangdog/cashbook
 ```
+
+- `-p 16001:80`：本地端口`16001`映射到容器端口`80`
+- `--name cashbook`：容器名`cashbook`
+- `-e CASHBOOK_MONGODB_URL=mongodb://username:password@127.0.0.1:27017/cashbook?authSource=admin`：通过环境变量配置MongoDB地址
 
 ## 截图展示
 
