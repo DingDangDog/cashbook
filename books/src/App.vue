@@ -33,7 +33,7 @@
 
       <el-main>
         <el-row class="mb-4">
-          <el-button round @click="showChart(1, '每日消费曲线')">每日消费曲线</el-button>
+          <el-button round @click="showChart(1, '日消费曲线')">日消费曲线</el-button>
           <el-button type="primary" round @click="showChart(2, '消费类型统计')">消费类型统计</el-button>
           <el-button type="success" round>Success</el-button>
           <el-button type="info" round>Info</el-button>

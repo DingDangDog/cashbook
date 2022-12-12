@@ -142,7 +142,7 @@ docker run -p 16001:80 --name cashbook -e CASHBOOK_MONGODB_URL=mongodb://usernam
 
 ![image-20221112131707572](./images/image-20221211184922539.png)
 
-### 每日流水统计曲线
+### 日消费统计曲线
 
 ![image-20221212164548484](./images/image-20221212164548484.png)
 
