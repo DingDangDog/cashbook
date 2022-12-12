@@ -80,8 +80,8 @@
 
 
       <el-footer>
-        <b>当前为内测版本，数据随时可能清除，请知悉！</b><br/>
-        <p>Powered by <a href="https://github.com/DingDangDog/cashbook">ddd-cashbook</a></p>
+        <b>当前为内测版本，数据随时可能清除，请知悉！</b>
+        <p>Powered by <a href="https://github.com/DingDangDog/cashbook">cashbook</a></p>
       </el-footer>
 
     </el-container>
