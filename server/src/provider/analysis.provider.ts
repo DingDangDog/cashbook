@@ -25,7 +25,10 @@ export class AnalysisProvider {
     const match: DailyLineChartMatch = {};
     match.bookKey = { $eq: query.bookKey };
     if (query.startDay && query.endDay) {
-      match.day = { $gte: query.startDay, $lte: query.endDay };
+      match.day = {
+        $gte: new Date(query.startDay),
+        $lte: new Date(query.endDay),
+      };
     }
 
     const res: DailyLineChartData[] = await this.flowModel
@@ -43,7 +46,10 @@ export class AnalysisProvider {
     const match: DailyLineChartMatch = {};
     match.bookKey = { $eq: query.bookKey };
     if (query.startDay && query.endDay) {
-      match.day = { $gte: query.startDay, $lte: query.endDay };
+      match.day = {
+        $gte: new Date(query.startDay),
+        $lte: new Date(query.endDay),
+      };
     }
 
     const res: TypePieChartData[] = await this.flowModel

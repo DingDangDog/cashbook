@@ -1,11 +1,24 @@
 <template>
+  <el-row class="queryRow" justify="center">
+    <div class="queryParam">
+      <el-date-picker v-model="queryRef.startDay" type="date" placeholder="开始时间" />
+    </div>
+    <div class="queryParam">
+      <el-date-picker v-model="queryRef.endDay" type="date" placeholder="结束时间" />
+    </div>
+    <div class="queryParam">
+      <el-button :icon="Search" circle @click="doQuery(queryRef)" />
+    </div>
+  </el-row>
   <div id="pieDiv" style="width:100%; height:400px; padding:10px">
   </div>
 </template>
 
 <script setup lang="ts">
 import type { TypePieChartQuery } from '@/types/model/analysis';
+import { Search } from '@element-plus/icons-vue';
 import * as echarts from 'echarts';
+import { ElMessage } from 'element-plus';
 import { onMounted, ref } from 'vue';
 import { typePie } from '../api/api.analysis'
 
@@ -23,6 +36,11 @@ const optionRef = ref({
     top: '5%',
     left: '0',
     orient: 'vertical'
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
   },
   series: [
     {
@@ -58,9 +76,19 @@ var pieDiv: any;
 var pieChart: echarts.ECharts;
 
 const doQuery = (query: TypePieChartQuery) => {
+  if (query.startDay) {
+    query.startDay = new Date(+(query.startDay || new Date()));
+  }
+  if (query.endDay) {
+    query.endDay = new Date(+(query.endDay || new Date()));
+  }
   typePie(query).then(res => {
     if (res) {
-      dataList.slice(0);
+      if (res.length === 0) {
+        ElMessage.error("未查询到数据！");
+        return;
+      }
+      dataList.length = 0;
       res.forEach((data) => {
         dataList.push({
           value: data.typeSum,
@@ -81,5 +109,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+.queryRow .queryParam {
+  margin: 8px 3px;
+}
 </style>

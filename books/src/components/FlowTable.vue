@@ -75,7 +75,7 @@
 
       <el-form-item label="日期" :label-width="formLabelWidth" prop="day">
         <el-date-picker v-model="flowRef.day" type="date" format="YYYY/MM/DD"
-          :default-value="new Date(flowRef.day || new Date())" @change="changeDate()" placeholder="选择">
+          :default-value="new Date(flowRef.day || new Date())" placeholder="选择">
         </el-date-picker>
       </el-form-item>
 
@@ -149,7 +149,7 @@ import type { FormInstance, FormRules, UploadFile, UploadUserFile } from 'elemen
 
 // 私有引入
 import { getFlowPage, deleteFlow, createFlow, update, getAll, importFlows } from '../api/api.flow'
-import { deviceAgent, timeFormatter } from '../utils/common'
+import { dateFormater, deviceAgent, timeFormatter } from '../utils/common'
 import { exportJson } from '../utils/fileUtils'
 import type { Page } from '../types/page';
 import type { Flow, FlowQuery } from '../types/model/flow';
@@ -320,6 +320,7 @@ const resetForm = (formEl: FormInstance | undefined, showDialog: boolean) => {
 
 // 创建
 const createOne = () => {
+  changeDate();
   createFlow({
     day: flowRef.day,
     type: flowRef.type,
@@ -345,6 +346,7 @@ const createOne = () => {
 
 // 更新
 const updateOne = () => {
+  changeDate();
   update(flowRef.id || -1, {
     day: flowRef.day,
     type: flowRef.type,
@@ -421,6 +423,7 @@ const openUpdateDialog = (title: string, updateFlow: Flow) => {
 
 const changeDate = () => {
   flowRef.day = new Date(+(flowRef.day || new Date()) + (8 * 60 * 60 * 1000));
+  flowRef.day = new Date(dateFormater('YYYY-MM-dd', new Date(+(flowRef.day || new Date))));
 };
 
 
