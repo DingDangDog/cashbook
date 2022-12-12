@@ -29,42 +29,17 @@
           <el-button v-if="haveUserIdRef()" type="primary" plain @click="openSet()">打卡账本</el-button>
         </div>
 
-        <!-- <button class="themeButton" style="margin-top: 30px;" @click="toggleDark()">
-          <i inline-block align-middle i="dark:carbon-moon carbon-sun"
-            style="background-color: rgb(193, 230, 198); border-color: rgba(0, 0, 0, 0.35); color: rgb(0, 0, 0);">
-          </i>
-          <span class="ml-2">{{ isDark ? 'Dark' : 'Light' }}</span>
-        </button> -->
       </el-header>
 
       <el-main>
         <el-row class="mb-4">
           <el-button round @click="showChart(1, '每日消费曲线')">每日消费曲线</el-button>
-          <el-button type="primary" round>Primary</el-button>
+          <el-button type="primary" round @click="showChart(2, '消费类型统计')">消费类型统计</el-button>
           <el-button type="success" round>Success</el-button>
           <el-button type="info" round>Info</el-button>
           <el-button type="warning" round>Warning</el-button>
           <el-button type="danger" round>Danger</el-button>
         </el-row>
-
-        <!-- 图标类型按钮 -->
-        <!-- <el-row>
-          <el-button :icon="Search" circle />
-          <el-button type="primary" :icon="Edit" circle />
-          <el-button type="success" :icon="Check" circle />
-          <el-button type="info" :icon="Message" circle />
-          <el-button type="warning" :icon="Star" circle />
-          <el-button type="danger" :icon="Delete" circle />
-        </el-row> -->
-
-        <!-- <div class="charts">
-          <div class="chart">
-            <LineChart />
-          </div>
-          <div class="chart">
-            <PieChart />
-          </div>
-        </div> -->
 
         <div class="table">
           <Suspense>
@@ -88,6 +63,7 @@
 
   <el-dialog v-model="chartDialog.chartDiaLogShow" :title="chartDialog.chartDiaLogTitle">
     <div v-if="(chartDialog.showChartNum == 1)"><DailyLineChart/></div>
+    <div v-if="(chartDialog.showChartNum == 2)"><TypePieChart/></div>
   </el-dialog>
 
   </div>
@@ -104,6 +80,7 @@ import { openSet, clearUser } from './utils/setKey'
 import { defineAsyncComponent } from 'vue'
 const FlowTable = defineAsyncComponent(() => import("./components/FlowTable.vue"));
 const DailyLineChart = defineAsyncComponent(() => import("./components/DailyLineChart.vue"));
+const TypePieChart = defineAsyncComponent(() => import("./components/TypePieChart.vue"));
 
 // 设置账本
 const bookName = localStorage.getItem('bookName');

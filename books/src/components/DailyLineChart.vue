@@ -12,44 +12,50 @@ import { dailyLine } from '../api/api.analysis'
 
 const query: DailyLineChartQuery = {
 }
+const queryRef = ref(query);
 
-const quertRef = ref(query);
-
+// 横轴数据
 const xAxisList: string[] = [];
+// 纵轴数据
 const dataList: number[] = [];
-onMounted(() => {
-  const option = {
-    xAxis: {
-      type: 'category',
-      data: xAxisList
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [
-      {
-        data: dataList,
-        type: 'line'
-      }
-    ]
-  };
 
-  const lineDiv: any = document.getElementById('lineDiv');
-  const lineChart = echarts.init(lineDiv);
-  lineChart.setOption(option);
+const optionRef = ref({
+  xAxis: {
+    type: 'category',
+    data: xAxisList
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: dataList,
+      type: 'line'
+    }
+  ]
+});
 
+var lineChart: echarts.ECharts;
 
-  dailyLine(quertRef.value).then(res => {
+const doQuery = (query: DailyLineChartQuery) => {
+  dailyLine(query).then(res => {
     if (res) {
+      xAxisList.slice(0);
+      dataList.slice(0);
       res.forEach((data) => {
         xAxisList.push(dateFormater('MM-dd', data._id));
         dataList.push(data.daySum);
       })
-      lineChart.setOption(option);
+      optionRef.value.xAxis.data = xAxisList;
+      optionRef.value.series[0].data = dataList;
+      lineChart.setOption(optionRef.value);
     }
   })
-
-
+}
+onMounted(() => {
+  const lineDiv: any = document.getElementById('lineDiv');
+  lineChart = echarts.init(lineDiv);
+  doQuery(queryRef.value);
 })
 </script>
 
