@@ -61,10 +61,10 @@
 
     </el-container>
 
-  <el-dialog v-model="chartDialog.chartDiaLogShow" :title="chartDialog.chartDiaLogTitle">
-    <div v-if="(chartDialog.showChartNum == 1)"><DailyLineChart/></div>
-    <div v-if="(chartDialog.showChartNum == 2)"><TypePieChart/></div>
-  </el-dialog>
+    <el-dialog v-model="chartDialog.chartDiaLogShow" :title="chartDialog.chartDiaLogTitle" @close="closeDialog()">
+      <DailyLineChart v-if="(chartDialog.showChartNum == 1)" />
+      <TypePieChart v-if="(chartDialog.showChartNum == 2)" />
+    </el-dialog>
 
   </div>
 </template>
@@ -112,6 +112,11 @@ const showChart = (showChartNum: number, chartDiaLogTitle: string) => {
   chartDialog.value.chartDiaLogShow = true;
   chartDialog.value.chartDiaLogTitle = chartDiaLogTitle;
   chartDialog.value.showChartNum = showChartNum;
+}
+
+const closeDialog = () => {
+  chartDialog.value.chartDiaLogShow = false;
+  chartDialog.value.showChartNum = 0;
 }
 
 // 动态表格样式

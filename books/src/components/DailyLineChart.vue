@@ -35,6 +35,7 @@ const optionRef = ref({
   ]
 });
 
+var lineDiv: any;
 var lineChart: echarts.ECharts;
 
 const doQuery = (query: DailyLineChartQuery) => {
@@ -48,13 +49,14 @@ const doQuery = (query: DailyLineChartQuery) => {
       })
       optionRef.value.xAxis.data = xAxisList;
       optionRef.value.series[0].data = dataList;
+
+      lineDiv = document.getElementById('lineDiv');
+      lineChart = echarts.init(lineDiv);
       lineChart.setOption(optionRef.value);
     }
   })
 }
 onMounted(() => {
-  const lineDiv: any = document.getElementById('lineDiv');
-  lineChart = echarts.init(lineDiv);
   doQuery(queryRef.value);
 })
 </script>

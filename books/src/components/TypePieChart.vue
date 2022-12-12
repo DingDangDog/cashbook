@@ -54,6 +54,7 @@ const optionRef = ref({
   ]
 });
 
+var pieDiv: any;
 var pieChart: echarts.ECharts;
 
 const doQuery = (query: TypePieChartQuery) => {
@@ -67,14 +68,14 @@ const doQuery = (query: TypePieChartQuery) => {
         });
       })
       optionRef.value.series[0].data = dataList;
+      pieDiv = document.getElementById('pieDiv');
+      pieChart = echarts.init(pieDiv);
       pieChart.setOption(optionRef.value);
     }
   })
 }
 
 onMounted(() => {
-  const pieDiv: any = document.getElementById('pieDiv');
-  pieChart = echarts.init(pieDiv);
   doQuery(queryRef.value);
 })
 </script>
