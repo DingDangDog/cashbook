@@ -5,10 +5,11 @@
 DDD记账本
 </p>
 <p align="center">
-  <img src="https://img.shields.io/github/stars/DingDangDog/ddd-cashbook" />
-  <img src="https://img.shields.io/github/forks/DingDangDog/ddd-cashbook" />
-  <img src="https://img.shields.io/github/issues/DingDangDog/ddd-cashbook?color=important" />
-  <img src="https://img.shields.io/badge/license-MIT-yellow.svg" />
+  <img alt="stars" src="https://img.shields.io/github/stars/DingDangDog/cashbook" />
+  <img alt="dorks" src="https://img.shields.io/github/forks/DingDangDog/cashbook" />
+  <img alt="issues-open" src="https://img.shields.io/github/issues/DingDangDog/cashbook?color=important" />
+  <img alt="issues-close" src="https://img.shields.io/github/issues-closed/DingDangDog/cashbook?color=green" />
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-yellow.svg" />
 </p>
 
 ## 必读建议
@@ -36,12 +37,11 @@ DDD记账本
 
 - [x]  主题切换：黑(`Dark`)/白(`Light`)
 - [x]  每日流水趋势曲线
-- [ ]  流水统计图表
-- [ ]  流水分类统计
+- [x]  流水分类统计饼图
 - [x]  初步实现docker部署
 - [x]  前后端docker镜像合并部署
 - [x]  增加docker-compose容器编排
-
+- [ ]  列表展示流水总额
 
 ## 演示系统
 
