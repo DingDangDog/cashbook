@@ -1,10 +1,9 @@
 {
   "name": "cashbook",
-  "version": "0.0.4",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
-    "release": "standard-version",
-    "build": "bash scripts/build.sh"
+    "release": "standard-version"
   },
   "dependencies": {
     "standard-version": "^9.5.0"
