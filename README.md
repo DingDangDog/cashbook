@@ -27,14 +27,9 @@ DDD记账本
 
 ## 主要功能
 
-### 基本功能
-
 - [x]  新增账本
 - [x]  记录流水（增删改查）
 - [x]  导入导出流水
-
-### 拓展功能
-
 - [x]  主题切换：黑(`Dark`)/白(`Light`)
 - [x]  每日流水趋势曲线
 - [x]  流水分类统计饼图
@@ -121,6 +116,10 @@ docker run -p 16001:80 --name cashbook -e CASHBOOK_MONGODB_URL=mongodb://usernam
 - `-p 16001:80`：本地端口`16001`映射到容器端口`80`
 - `--name cashbook`：容器名`cashbook`
 - `-e CASHBOOK_MONGODB_URL=mongodb://username:password@127.0.0.1:27017/cashbook?authSource=admin`：通过环境变量配置MongoDB地址
+
+## 更新日志
+
+- [changelog](./docs/ref/changelog.md)
 
 ## 截图展示
 
