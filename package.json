@@ -8,7 +8,7 @@
     "tag-patch": "standard-version --release-as patch",
     "release-docs": "node scripts/changelog.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "standard-version": "^9.5.0"
   }
 }
