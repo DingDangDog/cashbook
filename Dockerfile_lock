@@ -1,17 +1,17 @@
 # 前端容器
 FROM nginx:latest as BOOKS_BUILD
 
-COPY ./books/dist /etc/nginx/html/books
-COPY ./books/nginx.conf /etc/nginx/nginx.conf
-COPY ./books/mime.types /etc/nginx/mime.types
+COPY ./source/books/dist /etc/nginx/html/books
+COPY ./source/books/nginx.conf /etc/nginx/nginx.conf
+COPY ./source/books/mime.types /etc/nginx/mime.types
 
 
 # 后端容器
 FROM alpine:3.17 as SERVER_BUILD
 
 WORKDIR /usr/books/server
-COPY ./server/node_modules ./node_modules
-COPY ./server/dist ./dist
+COPY ./source/server/node_modules ./node_modules
+COPY ./source/server/dist ./dist
 
 
 # 运行容器
@@ -37,7 +37,7 @@ COPY --from=SERVER_BUILD /usr/books/server/node_modules ./node_modules
 COPY --from=SERVER_BUILD /usr/books/server/dist ./dist
 
 ENV NODE_OPTIONS=--max_old_space_size=2048
-ENV CASHBOOK_VERSION "0.0.1"
+ENV CASHBOOK_VERSION {{version}}
 ENV CASHBOOK_MONGODB_URL "mongodb://localhost:27017/cashbook?authSource=admin"
 
 COPY ./entrypoint.sh ../
