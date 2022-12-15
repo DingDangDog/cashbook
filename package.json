@@ -3,10 +3,9 @@
   "version": "0.0.9",
   "private": true,
   "scripts": {
-    "release": "standard-version",
-    "release-major": "standard-version --release-as major",
-    "release-minor": "standard-version --release-as minor",
-    "release-patch": "standard-version --release-as patch",
+    "tag-major": "standard-version --release-as major",
+    "tag-minor": "standard-version --release-as minor",
+    "tag-patch": "standard-version --release-as patch",
     "release-docs": "node scripts/changelog.js"
   },
   "dependencies": {
