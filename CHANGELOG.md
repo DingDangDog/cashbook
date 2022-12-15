@@ -1,4 +1,32 @@
 # Changelog
+### [0.0.10](https://github.com/DingDangDog/cashbook/compare/v0.0.9...v0.0.10) (2022-12-15)
+
+
+### 📚 Documentation | 文档
+
+* 更新文档 ([6d65103](https://github.com/DingDangDog/cashbook/commit/6d65103ec2615a922cdc7d2838fecdc2bf5a0551))
+
+
+### 🛴 Features | 新功能
+
+* 增加本地意见编译脚本 ([c72da9c](https://github.com/DingDangDog/cashbook/commit/c72da9c6bc8d01594a9443f1c88ab0e52db0733a))
+* 增加docker一键构建镜像脚本 ([a13465d](https://github.com/DingDangDog/cashbook/commit/a13465d2e221c80601e24d6e108091c0c06a41d3))
+* 增加docker一键清理本地镜像脚本 ([3712975](https://github.com/DingDangDog/cashbook/commit/3712975882360c15aba90c3129321e6e4784901f))
+* 增加docker一键推送镜像脚本 ([2bea0c1](https://github.com/DingDangDog/cashbook/commit/2bea0c1ba2cae9f94325335b51f4072805eb32d8))
+
+
+### ✂ Code Refactoring | 代码重构
+
+* 构建脚本改名 ([2c4ce03](https://github.com/DingDangDog/cashbook/commit/2c4ce0386519d3a5c7fd6a42a1cc09315c7452fd))
+* 删除Dockerfile，增加Dockerfile_lock，每次构建镜像重新生成Dockerfile ([6e2f0e9](https://github.com/DingDangDog/cashbook/commit/6e2f0e967da2ecba6a84f4379cf996fabd48c93e))
+* 源码包迁移 ([4e4f708](https://github.com/DingDangDog/cashbook/commit/4e4f7087eaadcc1b980bb940d8289c8fb9997af6))
+
+
+### 🚩 Chore | 构建/工程依赖/工具
+
+* 将standard-version依赖改为开发环境依赖 ([42e2b6d](https://github.com/DingDangDog/cashbook/commit/42e2b6dfbf73333a1393dd51e67b002beb9e1e3a))
+* 增加docker等一键脚本，简化编译构建流程 ([e4c1a55](https://github.com/DingDangDog/cashbook/commit/e4c1a553e312f93aa3812777e4e65ec1af28a282))
+
 ### [0.0.9](https://github.com/DingDangDog/cashbook/compare/v0.0.8...v0.0.9) (2022-12-15)
 
 
