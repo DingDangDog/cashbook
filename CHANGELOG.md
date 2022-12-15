@@ -2,7 +2,7 @@
 ### [0.0.7](https://github.com/DingDangDog/cashbook/compare/v0.0.6...v0.0.7) (2022-12-15)
 
 
-### 🚖 Documentation | 文档
+### 📚 Documentation | 文档
 
 * CHANGELOG文档自动更新 ([baaea47](https://github.com/DingDangDog/cashbook/commit/baaea47fd48a0dbd26216f74685e6f973e26b95c))
 
