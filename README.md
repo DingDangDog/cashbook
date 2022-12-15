@@ -2,7 +2,10 @@
 <h1>cashbook</h1>
 </div>
 <p align="center">
-DDD记账本
+DingDangDog’s Cashbook
+</p>
+<p align="center">
+叮噹Dog的记账本
 </p>
 <p align="center">
   <img alt="stars" src="https://img.shields.io/github/stars/DingDangDog/cashbook" />
