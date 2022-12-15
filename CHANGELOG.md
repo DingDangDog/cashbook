@@ -9,7 +9,7 @@
 
 ### 🛴 Features | 新功能
 
-* 增加本地意见编译脚本 ([c72da9c](https://github.com/DingDangDog/cashbook/commit/c72da9c6bc8d01594a9443f1c88ab0e52db0733a))
+* 增加本地一键编译脚本 ([c72da9c](https://github.com/DingDangDog/cashbook/commit/c72da9c6bc8d01594a9443f1c88ab0e52db0733a))
 * 增加docker一键构建镜像脚本 ([a13465d](https://github.com/DingDangDog/cashbook/commit/a13465d2e221c80601e24d6e108091c0c06a41d3))
 * 增加docker一键清理本地镜像脚本 ([3712975](https://github.com/DingDangDog/cashbook/commit/3712975882360c15aba90c3129321e6e4784901f))
 * 增加docker一键推送镜像脚本 ([2bea0c1](https://github.com/DingDangDog/cashbook/commit/2bea0c1ba2cae9f94325335b51f4072805eb32d8))
