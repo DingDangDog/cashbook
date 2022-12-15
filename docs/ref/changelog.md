@@ -1,4 +1,17 @@
 # 更新日志📣
+### [0.0.12](https://github.com/DingDangDog/cashbook/compare/v0.0.11...v0.0.12) (2022-12-15)
+
+
+### 🚙 Styles | 风格
+
+* 脚本从js改为ts，显得更牛🍺 ([a67947b](https://github.com/DingDangDog/cashbook/commit/a67947b2820244af17868a499b15d67640fc0e99))
+
+
+### 📚 Documentation | 文档
+
+* 别问，问就是根本停不下来 ([cd362ad](https://github.com/DingDangDog/cashbook/commit/cd362ad289b370636553e5483016876fb9f88031))
+* 更新文档 ([bac652a](https://github.com/DingDangDog/cashbook/commit/bac652ac21b821dfd9d28a13875616f777732fee))
+
 ### [0.0.11](https://github.com/DingDangDog/cashbook/compare/v0.0.10...v0.0.11) (2022-12-15)
 
 
