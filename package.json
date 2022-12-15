@@ -3,10 +3,14 @@
   "version": "0.0.9",
   "private": true,
   "scripts": {
+    "release": "node scripts/changelog.js",
+    "build": "node scripts/build.js",
+    "docker-build": "node scripts/docker-build.ts",
+    "docker-push": "node scripts/docker-push.ts",
+    "docker-clean": "node scripts/docker-clean.ts",
     "tag-major": "standard-version --release-as major",
     "tag-minor": "standard-version --release-as minor",
-    "tag-patch": "standard-version --release-as patch",
-    "release-docs": "node scripts/changelog.js"
+    "tag-patch": "standard-version --release-as patch"
   },
   "devDependencies": {
     "standard-version": "^9.5.0"
