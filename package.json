@@ -7,7 +7,7 @@
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
-    "docs:changelog": "node scripts/changelog.js"
+    "release-docs": "node scripts/changelog.js"
   },
   "dependencies": {
     "standard-version": "^9.5.0"
