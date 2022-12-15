@@ -1,4 +1,22 @@
 # Changelog
+### [0.0.11](https://github.com/DingDangDog/cashbook/compare/v0.0.10...v0.0.11) (2022-12-15)
+
+
+### 📚 Documentation | 文档
+
+* 更新文档 ([977093d](https://github.com/DingDangDog/cashbook/commit/977093d78fc0960134cdb8acc18608dabbfd8038))
+
+
+### 🚙 Styles | 风格
+
+* 脚本顺序修改 ([2fc72ce](https://github.com/DingDangDog/cashbook/commit/2fc72cece9359559da79535bec3a28c9a641ffe7))
+* 增加引号，更规范 ([3e57f51](https://github.com/DingDangDog/cashbook/commit/3e57f51fd38bd5759dd1756fbb54d3a8a68f8ad6))
+
+
+### 🚑 Bug Fixes | Bug 修复
+
+* 错别字修改 ([b5110af](https://github.com/DingDangDog/cashbook/commit/b5110af7d7d9cc8fc1025fb19c217d1ec31e0616))
+
 ### [0.0.10](https://github.com/DingDangDog/cashbook/compare/v0.0.9...v0.0.10) (2022-12-15)
 
 
