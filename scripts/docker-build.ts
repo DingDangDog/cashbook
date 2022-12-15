@@ -5,7 +5,7 @@ const docker_build = () => {
   const version = pack.version;
 
   const dockerfile = fs.readFileSync("Dockerfile_lock", { encoding: "utf-8" });
-  const realDockerfile = dockerfile.replace("{{version}}", version);
+  const realDockerfile = dockerfile.replace("{{version}}", '"' + version + '"');
   fs.writeFileSync("Dockerfile", realDockerfile, { encoding: "utf-8" });
 
   // 添加脚本执行器
