@@ -1,4 +1,7 @@
 const docker_build = () => {
+  const build = require("./build.ts");
+  build.build();
+
   const fs = require("fs");
   const packageInfo = fs.readFileSync("package.json", { encoding: "utf-8" });
   const pack = JSON.parse(packageInfo);
