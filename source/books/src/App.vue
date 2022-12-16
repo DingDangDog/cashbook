@@ -13,16 +13,16 @@
               :height="tableDivStyle.paddingleft.replace('px', '')" />
           </a>
         </div>
-        <div class="headerInfo">
+        <div class="headerInfo" text-algin="center">
           <h1>DDD-CashBook</h1>
         </div>
-
         <div class="themeButton">
           <el-button plain @click="toggleDark()">{{ isDark ? 'Dark' : 'Light' }}
           </el-button>
         </div>
         <div class="themeButton">
-          <span v-if="!haveUserIdRef()">账本：{{ bookName }}&nbsp;</span>
+          <b>当前为内测版本，数据随时可能清除，请知悉！</b>&nbsp;&nbsp;
+          <span v-if="!haveUserIdRef()">当前账本：{{ bookName }}&nbsp;</span>
           <el-button v-if="!haveUserIdRef()" type="info" plain @click="clearUser()">关闭账本</el-button>
         </div>
         <div class="themeButton">
@@ -55,8 +55,8 @@
 
 
       <el-footer>
-        <b>当前为内测版本，数据随时可能清除，请知悉！</b>
-        <p style="margin-top: 0px;">Powered by <a href="https://github.com/DingDangDog/cashbook">cashbook</a></p>
+        <p style="margin-top: 0px; margin-bottom: 0px;">Powered by <a href="https://github.com/DingDangDog">DingDangDog</a> / <a href="https://github.com/DingDangDog/cashbook">cashbook</a></p>
+        <p style="margin-top: 0px; margin-bottom: 0px;">友链：<a href="https://oldmoon.top/about">oldmoon.top</a></p>
       </el-footer>
 
     </el-container>
