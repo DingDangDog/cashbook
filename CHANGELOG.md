@@ -1,4 +1,29 @@
 # Changelog
+### [0.0.13](https://github.com/DingDangDog/cashbook/compare/v0.0.12...v0.0.13) (2022-12-16)
+
+
+### 📚 Documentation | 文档
+
+* 更新文档 ([d18eabf](https://github.com/DingDangDog/cashbook/commit/d18eabff32c04e626d2532fce2d90ad58ac29a53))
+* 更新文档 ([20bc4e5](https://github.com/DingDangDog/cashbook/commit/20bc4e5da259d05e95efc58782608c4ace4ef44f))
+
+
+### 🚩 Chore | 构建/工程依赖/工具
+
+* 删除文件 ([5a8ec48](https://github.com/DingDangDog/cashbook/commit/5a8ec48bfb124f4aba03c91591479114f72cf262))
+* 增加依赖，解决部分ts文件报红问题 ([c85a625](https://github.com/DingDangDog/cashbook/commit/c85a625c6425acdd3593bb2b3426855eb07f2041))
+
+
+### ✂ Code Refactoring | 代码重构
+
+* 提示性内容调整 ([c025684](https://github.com/DingDangDog/cashbook/commit/c025684beae3d8a38d2c699b02cb10d8143ca940))
+
+
+### 🛴 Features | 新功能
+
+* 分页数据接口增加总金额统计 ([624aae4](https://github.com/DingDangDog/cashbook/commit/624aae45112e15b3934a1b8f5ea4e05b46fab124))
+* 列表底部增加消费总额数据展示 close [#6](https://github.com/DingDangDog/cashbook/issues/6) ([a53351e](https://github.com/DingDangDog/cashbook/commit/a53351ebdfeefbc88b25822fc190d7ca61d5b3cd))
+
 ### [0.0.12](https://github.com/DingDangDog/cashbook/compare/v0.0.11...v0.0.12) (2022-12-15)
 
 
