@@ -5,6 +5,7 @@ import { sleep } from 'src/utils/sleep';
 import { Flow, FlowDocument } from 'src/schema/flow.schema';
 import { CreateFlowDto, UpdateFlowDto, FlowQuery } from 'src/types/flow.dto';
 import { Page } from 'src/types/common/page.dto';
+import { AnalysisProvider } from './analysis.provider';
 
 @Injectable()
 export class FlowProvider {
@@ -12,6 +13,7 @@ export class FlowProvider {
   constructor(
     @InjectModel('Flow')
     private flowModel: Model<FlowDocument>,
+    private readonly analysisProvider: AnalysisProvider,
   ) {}
 
   async getPage(query: FlowQuery): Promise<Page<Flow>> {
@@ -60,6 +62,9 @@ export class FlowProvider {
       total > query.pageSize ? total / query.pageSize : 1,
     );
     page.pageNum = parseInt(query.pageNum as any);
+
+    const totalMoney = await this.analysisProvider.getTotalMoney(query.bookKey);
+    page.totalMoney = totalMoney;
     return page;
   }
 

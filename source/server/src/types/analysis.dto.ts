@@ -39,3 +39,8 @@ export interface TypePieChartData {
   _id: any;
   typeSum: number;
 }
+
+export interface TotalMoneyData {
+  _id: any;
+  totalMoney: number;
+}

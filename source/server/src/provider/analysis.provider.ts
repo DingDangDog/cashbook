@@ -5,6 +5,7 @@ import { FlowDocument } from 'src/schema/flow.schema';
 import {
   DailyLineChartData,
   DailyLineChartQuery,
+  TotalMoneyData,
   TypePieChartData,
   TypePieChartQuery,
 } from 'src/types/analysis.dto';
@@ -59,5 +60,20 @@ export class AnalysisProvider {
       .sort({ _id: 1 })
       .exec();
     return res;
+  }
+
+  async getTotalMoney(bookKey: string) {
+    const match = {
+      bookKey: {
+        $eq: bookKey,
+      },
+    };
+    const data: TotalMoneyData[] = await this.flowModel
+      .aggregate()
+      .match(match)
+      .group({ _id: '$bookKey', totalMoney: { $sum: '$money' } })
+      .sort({ _id: 1 })
+      .exec();
+    return data[0].totalMoney;
   }
 }
