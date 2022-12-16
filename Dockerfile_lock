@@ -37,7 +37,9 @@ COPY --from=SERVER_BUILD /usr/books/server/node_modules ./node_modules
 COPY --from=SERVER_BUILD /usr/books/server/dist ./dist
 
 ENV NODE_OPTIONS=--max_old_space_size=2048
+ENV TZ "Asia/Shanghai"
 ENV CASHBOOK_VERSION {{version}}
+ENV CASHBOOK_ENVIRONMENT "personal"
 ENV CASHBOOK_MONGODB_URL "mongodb://localhost:27017/cashbook?authSource=admin"
 
 COPY ./entrypoint.sh ../
