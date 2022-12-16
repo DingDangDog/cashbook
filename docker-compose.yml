@@ -7,6 +7,7 @@ services:
     restart: always
     environment:
       TZ: "Asia/Shanghai"
+      CASHBOOK_ENVIRONMENT: "personal"
       # cashbook使用的mongodb地址，默认是我本地的地址，其他人使用请自行修改
       CASHBOOK_MONGODB_URL: "mongodb://localmongo:localmongo@172.20.96.1:27017/cashbook?authSource=admin"
     ports:
