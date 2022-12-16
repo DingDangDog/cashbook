@@ -14,14 +14,14 @@
           </a>
         </div>
         <div class="headerInfo" text-algin="center">
-          <h1>DDD-CashBook</h1>
+          <h1>CashBook</h1>
         </div>
         <div class="themeButton">
           <el-button plain @click="toggleDark()">{{ isDark ? 'Dark' : 'Light' }}
           </el-button>
         </div>
         <div class="themeButton">
-          <b>当前为内测版本，数据随时可能清除，请知悉！</b>&nbsp;&nbsp;
+          <b v-if="serverInfo.environment === 'domo'">演示系统，数据随时可能清除，请知晓！</b>&nbsp;&nbsp;
           <span v-if="!haveUserIdRef()">当前账本：{{ bookName }}&nbsp;</span>
           <el-button v-if="!haveUserIdRef()" type="info" plain @click="clearUser()">关闭账本</el-button>
         </div>
@@ -55,7 +55,7 @@
 
 
       <el-footer>
-        <p style="margin-top: 0px; margin-bottom: 0px;">Powered by <a href="https://github.com/DingDangDog">DingDangDog</a> / <a href="https://github.com/DingDangDog/cashbook">cashbook</a></p>
+        <p style="margin-top: 0px; margin-bottom: 0px;">Powered by <a href="https://github.com/DingDangDog/cashbook">DingDangDog/cashbook_{{serverInfo.version}}</a></p>
         <p style="margin-top: 0px; margin-bottom: 0px;">友链：<a href="https://oldmoon.top/about">oldmoon.top</a></p>
       </el-footer>
 
@@ -74,10 +74,9 @@ import { ref } from 'vue';
 import { useToggle } from '@vueuse/shared';
 import { useDark } from '@vueuse/core';
 import { openSet, clearUser } from './utils/setKey'
-// import { deviceAgent } from './api/common'
-
-// 异步组件引用
 import { defineAsyncComponent } from 'vue'
+import { getServerInfo } from './api/api.server';
+// 异步组件引用
 const FlowTable = defineAsyncComponent(() => import("./components/FlowTable.vue"));
 const DailyLineChart = defineAsyncComponent(() => import("./components/DailyLineChart.vue"));
 const TypePieChart = defineAsyncComponent(() => import("./components/TypePieChart.vue"));
@@ -121,7 +120,8 @@ const closeDialog = () => {
 
 // 动态表格样式
 const tableDivStyle = ref({
-  paddingtop: document.documentElement.clientHeight * 0.01 + `px`,
+  margintop: document.documentElement.clientHeight * 0.005 + `px`,
+  paddingtop: document.documentElement.clientHeight * 0.02 + `px`,
   paddingbottom: document.documentElement.clientHeight * 0.01 + `px`,
   paddingleft: document.documentElement.clientWidth * 0.03 + `px`,
   paddingright: document.documentElement.clientWidth * 0.03 + `px`,
@@ -129,17 +129,38 @@ const tableDivStyle = ref({
   footer: document.documentElement.clientWidth * 0.02 + `px`
 });
 
+const serverInfo = ref({
+  id: 1,
+  version: '',
+  environment: '',
+  createDate: new Date(),
+  startDate: new Date(),
+});
+
+getServerInfo().then(res => {
+  serverInfo.value.id = res.id;
+  serverInfo.value.version = res.version || '';
+  serverInfo.value.environment = res.environment || '';
+  serverInfo.value.createDate = res.createDate;
+  serverInfo.value.startDate = res.startDate;
+})
 </script>
 
 <style scoped>
+.el-main {
+  padding-top: v-bind('tableDivStyle.paddingtop');
+  padding-bottom: v-bind('tableDivStyle.paddingtop');
+  float: left;
+}
+
 .headerInfo {
-  margin-top: 10px;
+  margin-top: v-bind('tableDivStyle.margintop');
   margin-right: 20px;
   float: left;
 }
 
 .headerInfo>.h1 {
-  margin-top: v-bind('tableDivStyle.paddingtop');
+  margin-top: v-bind('tableDivStyle.margintop');
 }
 
 .themeButton {
@@ -162,8 +183,6 @@ const tableDivStyle = ref({
 
 .table {
   float: none;
-  /* padding-top: v-bind('tableDivStyle.paddingtop');
-  padding-bottom: v-bind('tableDivStyle.paddingbottom'); */
   padding-left: v-bind('tableDivStyle.paddingleft');
   padding-right: v-bind('tableDivStyle.paddingright');
 }

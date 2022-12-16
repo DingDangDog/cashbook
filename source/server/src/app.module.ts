@@ -13,6 +13,11 @@ import { BookProvider } from './provider/book.provider';
 
 import { AnalysisController } from './controller/analysis.controller';
 import { AnalysisProvider } from './provider/analysis.provider';
+
+import { Server, ServerSchema } from './schema/server.schema';
+import { ServerController } from './controller/server.controller';
+import { ServerProvider } from './provider/server.provider';
+
 import { config } from './config';
 
 @Module({
@@ -22,6 +27,7 @@ import { config } from './config';
     MongooseModule.forFeature([
       { name: Flow.name, schema: FlowSchema },
       { name: Book.name, schema: BookSchema },
+      { name: Server.name, schema: ServerSchema },
     ]),
   ],
   controllers: [
@@ -29,7 +35,14 @@ import { config } from './config';
     FlowController,
     BookController,
     AnalysisController,
+    ServerController,
   ],
-  providers: [AppService, FlowProvider, BookProvider, AnalysisProvider],
+  providers: [
+    AppService,
+    FlowProvider,
+    BookProvider,
+    AnalysisProvider,
+    ServerProvider,
+  ],
 })
 export class AppModule {}
