@@ -1,4 +1,16 @@
 # 更新日志📣
+### [0.0.15](https://github.com/DingDangDog/cashbook/compare/v0.0.14...v0.0.15) (2022-12-16)
+
+
+### 📚 Documentation | 文档
+
+* 更新文档 ([46cd36d](https://github.com/DingDangDog/cashbook/commit/46cd36d1485de87b1213dc35dd1365d2acdcd98b))
+
+
+### 🚩 Chore | 构建/工程依赖/工具
+
+* 增加docker-compose默认环境变量 ([bafed4b](https://github.com/DingDangDog/cashbook/commit/bafed4b8ec82ee0fb9d3279a01f1673fd0e1e565))
+
 ### [0.0.14](https://github.com/DingDangDog/cashbook/compare/v0.0.13...v0.0.14) (2022-12-16)
 
 
