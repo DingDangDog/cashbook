@@ -29,7 +29,7 @@ DingDangDog’s Cashbook
 ## 演示系统
 
 - 请以PC端打开，目前未适配其他终端。
-- 演示地址：[cash.oldmoon.top](http://cash.oldmoon.top/)
+- 演示地址：[cash.oldmoon.top](https://cash.oldmoon.top/)
 - 演示账本钥匙：`fScrX9FwtiE`
 
 ## 概念说明
