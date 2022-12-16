@@ -14,7 +14,7 @@ export default defineConfig({
   server: {
     // 本服务暴露的端口
     host: '127.0.0.1',
-    port: 8080,
+    port: 9090,
     // 跨域配置
     proxy: {
       // /api相关接口跨域配置

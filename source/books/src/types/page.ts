@@ -4,5 +4,6 @@ export interface Page<T>{
     pageSize: number;
     totalPage: number;
     totalCount: number;
+    totalMoney: number;
     pageData: T[];
 }

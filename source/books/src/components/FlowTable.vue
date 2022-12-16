@@ -60,11 +60,14 @@
   </el-table>
 
   <div class="pageDiv">
-    <!-- {{ queryRef }},{{ flowPageRef }} -->
-    <el-pagination :current-page="queryRef.pageNum" :page-size="queryRef.pageSize" :total="flowPageRef.totalCount"
-      :page-sizes="[10, 20, 50, 100]" @size-change="pageSizeChange" @current-change="pageNumChange" background
-      layout="->, sizes, prev, pager, next">
-    </el-pagination>
+    <span>
+      <b style="float: left;">消费总额：{{ flowPageRef.totalMoney }}</b>
+      <!-- {{ queryRef }},{{ flowPageRef }} -->
+      <el-pagination :current-page="queryRef.pageNum" :page-size="queryRef.pageSize" :total="flowPageRef.totalCount"
+        :page-sizes="[10, 20, 50, 100]" @size-change="pageSizeChange" @current-change="pageNumChange" background
+        layout="->, sizes, prev, pager, next">
+      </el-pagination>
+    </span>
   </div>
 
 
@@ -199,6 +202,7 @@ const flowPage: Page<Flow> = {
   pageSize: 0,
   totalPage: 1,
   totalCount: 0,
+  totalMoney: 0,
   pageData: []
 };
 
