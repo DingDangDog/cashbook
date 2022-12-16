@@ -1,4 +1,36 @@
 # Changelog
+### [0.0.16](https://github.com/DingDangDog/cashbook/compare/v0.0.15...v0.0.16) (2022-12-16)
+
+
+### 📚 Documentation | 文档
+
+* 更新文档 ([c9e667d](https://github.com/DingDangDog/cashbook/commit/c9e667d673c417f3a0d6905246faf1f2fe40354d))
+
+
+### 🚙 Styles | 风格
+
+* 删除空行 ([3ba6a05](https://github.com/DingDangDog/cashbook/commit/3ba6a055a741ea3180e3a2e32d4cdbd4fae94942))
+
+
+### 🛴 Features | 新功能
+
+* 主页增加私人系统提示 ([852d04f](https://github.com/DingDangDog/cashbook/commit/852d04f1700ce6de4b0feae7bd1252eae046c938))
+
+
+### 🚩 Chore | 构建/工程依赖/工具
+
+* docker构建脚本增加前置：自动本地编译 ([13c46d4](https://github.com/DingDangDog/cashbook/commit/13c46d4fd4dddbe76c06368224cbb31894397ff8))
+
+
+### ✂ Code Refactoring | 代码重构
+
+* 脚本重构 ([e7d3c61](https://github.com/DingDangDog/cashbook/commit/e7d3c61df314764d1bcebde0c9155627342d12a3))
+
+
+### 🚑 Bug Fixes | Bug 修复
+
+* 服务信息初始化错误修复 ([35c4f7d](https://github.com/DingDangDog/cashbook/commit/35c4f7db0e4283edfbb9a138b16c7db4111f1d5c))
+
 ### [0.0.15](https://github.com/DingDangDog/cashbook/compare/v0.0.14...v0.0.15) (2022-12-16)
 
 
