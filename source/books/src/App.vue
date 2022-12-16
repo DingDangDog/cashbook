@@ -22,7 +22,7 @@
         </div>
         <div class="themeButton">
           <b v-if="serverInfo.environment === 'personal'" style="color: red;">私人系统，无关人员请离开！</b>&nbsp;&nbsp;
-          <b v-if="serverInfo.environment === 'domo'">演示系统，数据随时可能清除，请知晓！</b>&nbsp;&nbsp;
+          <b v-if="serverInfo.environment === 'demo'">演示系统，数据随时可能清除，请知晓！</b>&nbsp;&nbsp;
           <span v-if="!haveUserIdRef()">当前账本：{{ bookName }}&nbsp;</span>
           <el-button v-if="!haveUserIdRef()" type="info" plain @click="clearUser()">关闭账本</el-button>
         </div>
