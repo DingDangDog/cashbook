@@ -56,7 +56,7 @@
 
 
       <el-footer>
-        <p style="margin-top: 0px; margin-bottom: 0px;">Powered by <a href="https://github.com/DingDangDog/cashbook">DingDangDog/cashbook_{{serverInfo.version}}</a></p>
+        <p style="margin-top: 0px; margin-bottom: 0px;">Powered by <a href="https://github.com/DingDangDog/cashbook">DingDangDog/cashbook_v{{serverInfo.version}}</a></p>
         <p style="margin-top: 0px; margin-bottom: 0px;">友链：<a href="https://oldmoon.top/about">oldmoon.top</a></p>
       </el-footer>
 

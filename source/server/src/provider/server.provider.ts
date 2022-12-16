@@ -23,17 +23,17 @@ export class ServerProvider {
         version: server.version,
         environment: server.environment,
         createDate: server.createDate,
-        startDate: server.startDate,
+        startDate: new Date(),
       };
-      serverDto.startDate = new Date();
-      if (process.env.CASHBOOK_VERSIO) {
+      if (process.env.CASHBOOK_VERSION) {
         serverDto.version = process.env.CASHBOOK_VERSION;
+        server.version = process.env.CASHBOOK_VERSION;
       }
       if (process.env.CASHBOOK_ENVIRONMENT) {
         serverDto.environment = process.env.CASHBOOK_ENVIRONMENT;
+        server.environment = process.env.CASHBOOK_ENVIRONMENT;
       }
-      console.log(serverDto);
-      this.serverModel.updateOne({ id: serverDto.id }, { ...serverDto });
+      await this.serverModel.updateOne({ id: serverDto.id }, { ...serverDto });
     } else {
       const newServer: ServerDto = {
         id: 1,

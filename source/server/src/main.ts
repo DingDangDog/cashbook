@@ -5,8 +5,7 @@ import { ServerProvider } from './provider/server.provider';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const serverProvider = app.get(ServerProvider);
-  const serverInfo = await serverProvider.initServerInfo();
-  console.log(serverInfo);
+  await serverProvider.initServerInfo();
   await app.listen(3000);
 }
 bootstrap();
