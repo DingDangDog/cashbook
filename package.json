@@ -3,7 +3,8 @@
   "version": "0.0.15",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.js",
+    "local-build": "node scripts/local-build.ts",
+    "local-clean": "node scripts/local-clean.ts",
     "docker-build": "node scripts/docker-build.ts",
     "docker-push": "node scripts/docker-push.ts",
     "docker-clean": "node scripts/docker-clean.ts",
