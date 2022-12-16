@@ -87,6 +87,11 @@ export class FlowProvider {
     return data;
   }
 
+  async deleteAll(bookKey: string) {
+    const data = this.flowModel.deleteMany({ bookKey });
+    return data;
+  }
+
   async getAll(bookKey: string): Promise<Flow[]> {
     return await this.flowModel.find({ bookKey: bookKey }).exec();
   }
@@ -117,6 +122,14 @@ export class FlowProvider {
   }
 
   async importFlows(flows: Flow[]) {
-    return await this.flowModel.insertMany(flows);
+    let nextId: number = await this.getNewId();
+    this.idLock = true;
+    flows.forEach(async (flow) => {
+      flow.id = nextId;
+      nextId++;
+    });
+    const res = await this.flowModel.insertMany(flows);
+    this.idLock = false;
+    return res;
   }
 }
