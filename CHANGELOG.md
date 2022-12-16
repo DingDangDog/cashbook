@@ -1,4 +1,33 @@
 # Changelog
+### [0.0.14](https://github.com/DingDangDog/cashbook/compare/v0.0.13...v0.0.14) (2022-12-16)
+
+
+### 🚙 Styles | 风格
+
+* 修改网站图标 ([faa957e](https://github.com/DingDangDog/cashbook/commit/faa957edda9a867e4829ff8b482778798db9a909))
+
+
+### 🚑 Bug Fixes | Bug 修复
+
+* 数据导入时重新生成ID，close [#4](https://github.com/DingDangDog/cashbook/issues/4) ([821d549](https://github.com/DingDangDog/cashbook/commit/821d549c24c26ca08a09c74942ed450e45c48c35))
+
+
+### 🚩 Chore | 构建/工程依赖/工具
+
+* 增加docker默认环境变量 ([88e3de0](https://github.com/DingDangDog/cashbook/commit/88e3de061ec880d436a0394ecd9f37b3273b513d))
+
+
+### 📚 Documentation | 文档
+
+* 更新文档 ([72b4fab](https://github.com/DingDangDog/cashbook/commit/72b4fabb5d470615912af4f1a9e17fd272aab150))
+* 增加图标 ([b5e8b9a](https://github.com/DingDangDog/cashbook/commit/b5e8b9ae1d60d6784cc99f40fb646af2f98c1049))
+
+
+### 🛴 Features | 新功能
+
+* 增加服务信息表，并在系统启动时初始化 ([b674907](https://github.com/DingDangDog/cashbook/commit/b67490725a42f7d02fdb2e7cdb578cc9ef617c4e))
+* 增加演示站问题提示，增加当前服务版本动态显示 ([aff53a9](https://github.com/DingDangDog/cashbook/commit/aff53a9a7289cde1c984de95cb6c3a84444bdd52))
+
 ### [0.0.13](https://github.com/DingDangDog/cashbook/compare/v0.0.12...v0.0.13) (2022-12-16)
 
 
