@@ -1,4 +1,30 @@
 # Changelog
+### [0.0.17](https://github.com/DingDangDog/cashbook/compare/v0.0.16...v0.0.17) (2022-12-19)
+
+
+### 📚 Documentation | 文档
+
+* 更新文档 ([5c75d61](https://github.com/DingDangDog/cashbook/commit/5c75d6160bd5b88a95aeb7150d6d456ba533445d))
+* readme文档更新 ([efa2f71](https://github.com/DingDangDog/cashbook/commit/efa2f71ee5f3e78a63b2dbaf04f05f412c80047f))
+
+
+### 🚑 Bug Fixes | Bug 修复
+
+* 错别字修复 ([b6306bd](https://github.com/DingDangDog/cashbook/commit/b6306bd965a39d5c7b426745c2a5b0f0f3e4a69c))
+* 全局时间处理（参数传递使用字符串格式） close [#12](https://github.com/DingDangDog/cashbook/issues/12) ([92ac2a0](https://github.com/DingDangDog/cashbook/commit/92ac2a06b78a97fe5fde50b45ec29063b917f857))
+
+
+### 🚙 Styles | 风格
+
+* 前后端模块名修改 ([cb12f06](https://github.com/DingDangDog/cashbook/commit/cb12f06860e4b784a5307a292eec666f4e009ba4))
+* 演示系统url改为https ([c541d84](https://github.com/DingDangDog/cashbook/commit/c541d84713bbcbb6deda9e2015e1e0b6447f073b))
+
+
+### 🛴 Features | 新功能
+
+* 后端增加字典查询相关数据库、接口 ([100338f](https://github.com/DingDangDog/cashbook/commit/100338fea35fa20bf3a402eab59be2a3241fae9e))
+* 前端页面类型下拉选说句改为接口获取方式 ([943a76a](https://github.com/DingDangDog/cashbook/commit/943a76af08282f96b9ae3c3965adb1c17309d603))
+
 ### [0.0.16](https://github.com/DingDangDog/cashbook/compare/v0.0.15...v0.0.16) (2022-12-16)
 
 
