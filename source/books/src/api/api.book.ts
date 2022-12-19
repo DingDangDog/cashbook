@@ -1,12 +1,14 @@
 import $http from './index'
 import type { Book, CreateBookDto } from '../types/model/book';
 
+const prefix = '/book';
+
 /**
  * 查询用户信息
  * @returns User
  */
 export function getBook(bookKey: string): Promise<Book> {
-  return $http({ url: "/book/" + bookKey, method: "get"})
+  return $http({ url: prefix + "/" + bookKey, method: "get"})
 }
 
 
@@ -15,5 +17,5 @@ export function getBook(bookKey: string): Promise<Book> {
 * @returns User
 */
 export function createBook(createDto: CreateBookDto): Promise<Book> {
-  return $http({ url: "/book/createBook", method: "post", data: createDto })
+  return $http({ url: prefix + "/createBook", method: "post", data: createDto })
 }

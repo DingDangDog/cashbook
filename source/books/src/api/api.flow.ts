@@ -3,12 +3,14 @@ import type { Page } from '../types/page';
 import type { Flow, FlowQuery, CreateFlowDto, UpdateFlowDto } from '../types/model/flow';
 import type { UpdateResult, DeleteResult } from '../types/mongoose';
 
+const prefix = '/flow';
+
 /**
  * 查询全部流水
  * @returns FlowPage
  */
 export function getAll(bookKey: string): Promise<Flow[]> {
-    return $http({ url: "/flow/getAll", method: "get", params: { bookKey: bookKey } })
+    return $http({ url: prefix + "/getAll", method: "get", params: { bookKey: bookKey } })
 }
 
 /**
@@ -16,7 +18,7 @@ export function getAll(bookKey: string): Promise<Flow[]> {
  * @returns Page<Flow>
  */
 export function getFlowPage(query: FlowQuery): Promise<Page<Flow>> {
-    return $http({ url: "/flow", method: "get", params: query })
+    return $http({ url: prefix, method: "get", params: query })
 }
 
 
@@ -25,7 +27,7 @@ export function getFlowPage(query: FlowQuery): Promise<Page<Flow>> {
  * @returns Page<Flow>
  */
 export function createFlow(createDto: CreateFlowDto): Promise<Flow> {
-    return $http({ url: "/flow", method: "post", data: createDto })
+    return $http({ url: prefix, method: "post", data: createDto })
 }
 
 
@@ -34,7 +36,7 @@ export function createFlow(createDto: CreateFlowDto): Promise<Flow> {
  * @returns Page<Flow>
  */
 export function update(id: number, updateDto: UpdateFlowDto): Promise<UpdateResult> {
-    return $http({ url: "/flow/" + id, method: "put", data: updateDto })
+    return $http({ url: prefix + "/" + id, method: "put", data: updateDto })
 }
 
 
@@ -43,7 +45,7 @@ export function update(id: number, updateDto: UpdateFlowDto): Promise<UpdateResu
  * @returns Page<Flow>
  */
 export function deleteFlow(id: number): Promise<DeleteResult> {
-    return $http({ url: "/flow/" + id, method: "delete" })
+    return $http({ url: prefix + "/" + id, method: "delete" })
 }
 
 /**
@@ -52,5 +54,5 @@ export function deleteFlow(id: number): Promise<DeleteResult> {
  * @returns 
  */
 export function importFlows(flows: Flow[]) {
-    return $http({ url: "/flow/importFlows", method: "post", data: flows })
+    return $http({ url: prefix + "/importFlows", method: "post", data: flows })
 }

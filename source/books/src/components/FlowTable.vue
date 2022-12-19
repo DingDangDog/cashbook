@@ -14,13 +14,13 @@
     </div>
     <div class="queryParam">
       <el-select v-model="queryRef.type" class="m-2" placeholder="消费类型" clearable>
-        <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value" />
+        <el-option v-for="item in expenseTypeOptions" :key="item.distKey" :label="item.distValue" :value="item.distKey" />
       </el-select>
     </div>
 
     <div class="queryParam">
       <el-select v-model="queryRef.payType" class="m-2" placeholder="支付方式" clearable>
-        <el-option v-for="item in payTypeOptions" :key="item.value" :label="item.label" :value="item.value" />
+        <el-option v-for="item in paymentTypeOptions" :key="item.distKey" :label="item.distValue" :value="item.distKey" />
       </el-select>
     </div>
 
@@ -86,7 +86,7 @@
 
       <el-form-item label="消费类型" :label-width="formLabelWidth" prop="type">
         <el-select v-model="flowRef.type" placeholder="选择" clearable>
-          <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value" />
+          <el-option v-for="item in expenseTypeOptions" :key="item.distKey" :label="item.distValue" :value="item.distKey" />
         </el-select>
       </el-form-item>
 
@@ -96,7 +96,7 @@
 
       <el-form-item label="支付方式" :label-width="formLabelWidth" prop="payType">
         <el-select v-model="flowRef.payType" placeholder="选择" clearable>
-          <el-option v-for="item in payTypeOptions" :key="item.value" :label="item.label" :value="item.value" />
+          <el-option v-for="item in paymentTypeOptions" :key="item.distKey" :label="item.distValue" :value="item.distKey" />
         </el-select>
       </el-form-item>
 
@@ -154,10 +154,23 @@ import type { FormInstance, FormRules, UploadFile, UploadUserFile } from 'elemen
 
 // 私有引入
 import { getFlowPage, deleteFlow, createFlow, update, getAll, importFlows } from '../api/api.flow'
+import { getDistByType } from '../api/api.dist'
 import { dateFormater, deviceAgent, timeFormatter } from '../utils/common'
 import { exportJson } from '../utils/fileUtils'
 import type { Page } from '../types/page';
 import type { Flow, FlowQuery } from '../types/model/flow';
+import type { Dist } from '@/types/model/dist';
+
+// 初始化后自动执行
+onMounted(() => {
+  doQuery();
+  getDistByType('expenseType').then(data => {
+    expenseTypeOptions.value = data;
+  });
+  getDistByType('paymentType').then(data => {
+    paymentTypeOptions.value = data;
+  });
+});
 
 // const tableRef = ref();
 // tableRef.value.height = document.documentElement.clientHeight * 0.65;
@@ -169,28 +182,9 @@ const tableRef = ref({
 /*
  * 集中定义常量
  */
-const typeOptions = [
-  { value: '饮食', label: '饮食' },
-  { value: '办公', label: '办公' },
-  { value: '娱乐', label: '娱乐' },
-  { value: '生活', label: '生活' },
-  { value: '医疗', label: '医疗' },
-  { value: '社交', label: '社交' },
-  { value: '学习', label: '学习' },
-  { value: '通讯', label: '通讯' },
-  { value: '交通', label: '交通' },
-  { value: '住宿', label: '住宿' },
-  { value: '其他', label: '其他' }
-];
+const expenseTypeOptions = ref<Dist[]>([]);
 
-const payTypeOptions = [
-  { value: '支付宝', label: '支付宝' },
-  { value: '微信', label: '微信' },
-  { value: '京东白条', label: '京东白条' },
-  { value: '刷卡', label: '刷卡' },
-  { value: '现金', label: '现金' },
-  { value: '其他', label: '其他' }
-];
+const paymentTypeOptions = ref<Dist[]>([]);
 
 const query: FlowQuery = {
   pageNum: 1,
@@ -252,12 +246,6 @@ const queryRef = ref(query);
 const flowPageRef = ref(flowPage);
 // 表单弹窗数据绑定
 const flowRef = reactive(flow);
-
-
-// 初始化后自动执行
-onMounted(() => {
-  doQuery();
-});
 
 // 切换页码
 const pageNumChange = (pageNum: number) => {
