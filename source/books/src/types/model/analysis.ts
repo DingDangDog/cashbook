@@ -1,21 +1,21 @@
 export interface DailyLineChartQuery {
   bookKey?: string;
-  startDay?: Date;
-  endDay?: Date;
+  startDay?: string;
+  endDay?: string;
 }
 
 export interface DailyLineChart {
-  _id: Date;
+  _id: string;
   daySum: number;
 }
 
 export interface TypePieChartQuery {
   bookKey?: string;
-  startDay?: Date;
-  endDay?: Date;
+  startDay?: string;
+  endDay?: string;
 }
 
 export interface TypePieChart {
-  _id: Date;
+  _id: string;
   typeSum: number;
 }

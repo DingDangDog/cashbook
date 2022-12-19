@@ -26,9 +26,9 @@
           <span v-if="!haveUserIdRef()">当前账本：{{ bookName }}&nbsp;</span>
           <el-button v-if="!haveUserIdRef()" type="info" plain @click="clearUser()">关闭账本</el-button>
         </div>
-        <div class="themeButton">
+        <!-- <div class="themeButton">
           <el-button v-if="haveUserIdRef()" type="primary" plain @click="openSet()">打卡账本</el-button>
-        </div>
+        </div> -->
 
       </el-header>
 

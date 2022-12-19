@@ -3,7 +3,7 @@
  */
 export class CreateFlowDto {
   bookKey: string;
-  day: Date;
+  day: string;
   name: string;
   type: string;
   money: number;
@@ -16,7 +16,7 @@ export class CreateFlowDto {
  */
 export class UpdateFlowDto {
   bookKey: string;
-  day: Date;
+  day: string;
   type: string;
   money: number;
   payType: string;
@@ -29,8 +29,8 @@ export class FlowQuery {
   pageNum = 1;
   pageSize = 10;
   id?: number;
-  startDay?: Date;
-  endDay?: Date;
+  startDay?: string;
+  endDay?: string;
   type?: string;
   payType?: string;
   name?: string;

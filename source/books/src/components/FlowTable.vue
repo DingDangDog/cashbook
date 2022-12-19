@@ -5,10 +5,12 @@
     </div>
 
     <div class="queryParam">
-      <el-date-picker v-model="queryRef.startDay" type="date" placeholder="开始时间" />
+      <el-date-picker v-model="queryRef.startDay" type="date" format="YYYY/MM/DD" value-format="YYYY-MM-DD"
+        placeholder="开始时间" />
     </div>
     <div class="queryParam">
-      <el-date-picker v-model="queryRef.endDay" type="date" placeholder="结束时间" />
+      <el-date-picker v-model="queryRef.endDay" type="date" format="YYYY/MM/DD" value-format="YYYY-MM-DD"
+        placeholder="结束时间" />
     </div>
     <div class="queryParam">
       <el-select v-model="queryRef.type" class="m-2" placeholder="消费类型" clearable>
@@ -78,7 +80,7 @@
 
       <el-form-item label="日期" :label-width="formLabelWidth" prop="day">
         <el-date-picker v-model="flowRef.day" type="date" format="YYYY/MM/DD"
-          :default-value="new Date(flowRef.day || new Date())" placeholder="选择">
+          :default-value="new Date(flowRef.day || new Date())" value-format="YYYY-MM-DD" placeholder="选择">
         </el-date-picker>
       </el-form-item>
 
@@ -207,7 +209,7 @@ const flowPage: Page<Flow> = {
 // 初始化空对象
 const flow: Flow = {
   id: undefined,
-  day: new Date(),
+  day: undefined,
   type: undefined,
   payType: undefined,
   money: undefined,
@@ -271,12 +273,6 @@ const pageSizeChange = (pageSize: number) => {
 
 // 执行分页数据查询
 const doQuery = () => {
-  if (queryRef.value.startDay) {
-    queryRef.value.startDay = new Date(+(queryRef.value.startDay || new Date()) + (8 * 60 * 60 * 1000));
-  }
-  if (queryRef.value.endDay) {
-    queryRef.value.endDay = new Date(+(queryRef.value.endDay || new Date()) + (8 * 60 * 60 * 1000));
-  }
   getFlowPage(queryRef.value).then(res => {
     flowPageRef.value = res;
     // console.log(JSON.stringify(flowPage) + "doQuery");
@@ -322,9 +318,8 @@ const resetForm = (formEl: FormInstance | undefined, showDialog: boolean) => {
 
 // 创建
 const createOne = () => {
-  changeDate();
   createFlow({
-    day: flowRef.day,
+    day: dateFormater('YYYY-MM-dd', flowRef.day || new Date),
     type: flowRef.type,
     money: flowRef.money,
     payType: flowRef.payType,
@@ -348,9 +343,8 @@ const createOne = () => {
 
 // 更新
 const updateOne = () => {
-  changeDate();
   update(flowRef.id || -1, {
-    day: flowRef.day,
+    day: dateFormater('YYYY-MM-dd', flowRef.day || new Date),
     type: flowRef.type,
     money: flowRef.money,
     payType: flowRef.payType,
@@ -422,12 +416,6 @@ const openUpdateDialog = (title: string, updateFlow: Flow) => {
   flowRef.name = updateFlow.name;
   flowRef.description = updateFlow.description;
 };
-
-const changeDate = () => {
-  flowRef.day = new Date(+(flowRef.day || new Date()) + (8 * 60 * 60 * 1000));
-  flowRef.day = new Date(dateFormater('YYYY-MM-dd', new Date(+(flowRef.day || new Date))));
-};
-
 
 /**
  * 文件上传相关代码

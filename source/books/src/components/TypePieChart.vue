@@ -1,10 +1,12 @@
 <template>
   <el-row class="queryRow" justify="center">
     <div class="queryParam">
-      <el-date-picker v-model="queryRef.startDay" type="date" placeholder="开始时间" />
+      <el-date-picker v-model="queryRef.startDay" type="date" format="YYYY/MM/DD" value-format="YYYY-MM-DD"
+        placeholder="开始时间" />
     </div>
     <div class="queryParam">
-      <el-date-picker v-model="queryRef.endDay" type="date" placeholder="结束时间" />
+      <el-date-picker v-model="queryRef.endDay" type="date" format="YYYY/MM/DD" value-format="YYYY-MM-DD"
+        placeholder="结束时间" />
     </div>
     <div class="queryParam">
       <el-button :icon="Search" circle @click="doQuery(queryRef)" />
@@ -76,12 +78,6 @@ var pieDiv: any;
 var pieChart: echarts.ECharts;
 
 const doQuery = (query: TypePieChartQuery) => {
-  if (query.startDay) {
-    query.startDay = new Date(+(query.startDay || new Date()));
-  }
-  if (query.endDay) {
-    query.endDay = new Date(+(query.endDay || new Date()));
-  }
   typePie(query).then(res => {
     if (res) {
       if (res.length === 0) {

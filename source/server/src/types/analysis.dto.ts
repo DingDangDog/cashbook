@@ -3,8 +3,8 @@
  */
 export class DailyLineChartQuery {
   bookKey: string;
-  startDay: Date;
-  endDay: Date;
+  startDay: string;
+  endDay: string;
 }
 /**
  * 每日消费曲线Mongo查询条件规则实体
@@ -26,12 +26,12 @@ export interface DailyLineChartData {
  */
 export class TypePieChartQuery {
   bookKey: string;
-  startDay: Date;
-  endDay: Date;
+  startDay: string;
+  endDay: string;
 }
 
 export interface TypePieChartMatch {
-  bookKey?: any;
+  bookKey?: string;
   day?: any;
 }
 

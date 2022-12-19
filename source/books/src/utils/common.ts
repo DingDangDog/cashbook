@@ -40,7 +40,7 @@ export const timeFormatter = (_row: any, _column: Date, cellValue: string) => {
   * @author DingDangDog
   * @param format 格式化后的日期格式，标准格式：YYYY-MM-dd HH:mm:ss。
   * @param date 待格式化的日期，可以是string或Date类型
-  * @return 结果示例：2022-12-08 17:30:00
+  * @return 标准格式结果示例：2022-12-08 17:30:00
   */
 export const dateFormater = (format: string, date: string | Date) => {
   date = new Date(date);

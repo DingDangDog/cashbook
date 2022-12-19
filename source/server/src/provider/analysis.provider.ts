@@ -35,7 +35,10 @@ export class AnalysisProvider {
     const res: DailyLineChartData[] = await this.flowModel
       .aggregate()
       .match(match)
-      .group({ _id: '$day', daySum: { $sum: '$money' } })
+      .group({
+        _id: { $dateToString: { date: '$day', format: '%Y-%m-%d' } },
+        daySum: { $sum: '$money' },
+      })
       .sort({ _id: 1 })
       .exec();
     return res;

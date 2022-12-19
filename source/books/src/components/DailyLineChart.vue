@@ -1,10 +1,12 @@
 <template>
   <el-row class="queryRow" justify="center">
     <div class="queryParam">
-      <el-date-picker v-model="queryRef.startDay" type="date" placeholder="开始时间" />
+      <el-date-picker v-model="queryRef.startDay" type="date" format="YYYY/MM/DD" value-format="YYYY-MM-DD"
+        placeholder="开始时间" />
     </div>
     <div class="queryParam">
-      <el-date-picker v-model="queryRef.endDay" type="date" placeholder="结束时间" />
+      <el-date-picker v-model="queryRef.endDay" type="date" format="YYYY/MM/DD" value-format="YYYY-MM-DD"
+        placeholder="结束时间" />
     </div>
     <div class="queryParam">
       <el-button :icon="Search" circle @click="doQuery(queryRef)" />
@@ -87,12 +89,6 @@ var lineDiv: any;
 var lineChart: echarts.ECharts;
 
 const doQuery = (query: DailyLineChartQuery) => {
-  if (query.startDay) {
-    query.startDay = new Date(+(query.startDay || new Date()));
-  }
-  if (query.endDay) {
-    query.endDay = new Date(+(query.endDay || new Date()));
-  }
   dailyLine(query).then(res => {
     if (res) {
       if (res.length === 0) {
@@ -119,7 +115,7 @@ const doQuery = (query: DailyLineChartQuery) => {
 
 // 缩放比例动态计算，保证美观
 const zoomChange = (total: number): number => {
-  return (Math.ceil(total / 30) - 1)  * 10;
+  return (Math.ceil(total / 30) - 1) * 10;
 }
 
 onMounted(() => {

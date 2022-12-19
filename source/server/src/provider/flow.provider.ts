@@ -21,10 +21,10 @@ export class FlowProvider {
 
     and.push({ bookKey: { $eq: query.bookKey } });
     if (query.startDay) {
-      and.push({ day: { $gte: query.startDay } });
+      and.push({ day: { $gte: new Date(query.startDay) } });
     }
     if (query.endDay) {
-      and.push({ day: { $lte: query.endDay } });
+      and.push({ day: { $lte: new Date(query.endDay) } });
     }
     if (query.type) {
       and.push({ type: { $eq: query.type } });
@@ -69,7 +69,15 @@ export class FlowProvider {
   }
 
   async create(createFlowDto: CreateFlowDto): Promise<Flow> {
-    const createdData = new this.flowModel(createFlowDto);
+    const createdData = new this.flowModel({
+      bookKey: createFlowDto.bookKey,
+      day: new Date(createFlowDto.day),
+      name: createFlowDto.name,
+      type: createFlowDto.type,
+      money: createFlowDto.money,
+      payType: createFlowDto.payType,
+      description: createFlowDto.description,
+    });
     const newId = await this.getNewId();
     createdData.id = newId;
     const res = createdData.save();
@@ -77,7 +85,18 @@ export class FlowProvider {
   }
 
   async update(id: number, updateFlowDto: UpdateFlowDto) {
-    const res = this.flowModel.updateOne({ id }, { ...updateFlowDto });
+    const res = this.flowModel.updateOne(
+      { id },
+      {
+        bookKey: updateFlowDto.bookKey,
+        day: new Date(updateFlowDto.day),
+        name: updateFlowDto.name,
+        type: updateFlowDto.type,
+        money: updateFlowDto.money,
+        payType: updateFlowDto.payType,
+        description: updateFlowDto.description,
+      },
+    );
     return res;
   }
 
