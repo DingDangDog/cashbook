@@ -18,6 +18,10 @@ import { Server, ServerSchema } from './schema/server.schema';
 import { ServerController } from './controller/server.controller';
 import { ServerProvider } from './provider/server.provider';
 
+import { Dist, DistSchema } from './schema/dist.schema';
+import { DistController } from './controller/dist.controller';
+import { DistProvider } from './provider/dist.provider';
+
 import { config } from './config';
 
 @Module({
@@ -28,6 +32,7 @@ import { config } from './config';
       { name: Flow.name, schema: FlowSchema },
       { name: Book.name, schema: BookSchema },
       { name: Server.name, schema: ServerSchema },
+      { name: Dist.name, schema: DistSchema },
     ]),
   ],
   controllers: [
@@ -36,6 +41,7 @@ import { config } from './config';
     BookController,
     AnalysisController,
     ServerController,
+    DistController,
   ],
   providers: [
     AppService,
@@ -43,6 +49,7 @@ import { config } from './config';
     BookProvider,
     AnalysisProvider,
     ServerProvider,
+    DistProvider,
   ],
 })
 export class AppModule {}
