@@ -167,6 +167,7 @@ export class FlowController {
   @Post('/importFlows')
   async importFlows(
     @Headers('bookKey') bookKey = 'none',
+    @Query('flag') flag: string,
     @Body() flows: Flow[],
   ) {
     if ('none' === bookKey) {
@@ -175,7 +176,7 @@ export class FlowController {
         message: '导入失败，请使用合法钥匙！',
       };
     }
-    const data = await this.flowProvider.importFlows(flows);
+    const data = await this.flowProvider.importFlows(flag, flows);
     return {
       code: 200,
       data,

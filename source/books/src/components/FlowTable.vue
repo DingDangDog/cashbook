@@ -133,6 +133,11 @@
         </div>
       </template>
     </el-upload> -->
+    <el-radio-group v-model="importFlag" class="ml-4">
+      <el-radio label="overwrite" size="large"><b style="color: red;">删除原有流水</b></el-radio>
+      <el-radio label="add" size="large"><b>保留原有流水</b></el-radio>
+    </el-radio-group>
+    <hr/>
     <el-upload :auto-upload="false" :on-change="readJsonInfo" v-model:file-list='fileList'>
       <el-button type="primary">导入Json文件</el-button>
       <template #tip>
@@ -408,6 +413,8 @@ const openUpdateDialog = (title: string, updateFlow: Flow) => {
 /**
  * 文件上传相关代码
  */
+const importFlag = ref('overwrite');
+
 const fileList = ref<UploadUserFile[]>([]);
 
 const importFlowList: any = [];
@@ -429,7 +436,7 @@ const readJsonInfo = (flie: UploadFile) => {
           description: flow.description,
         })
       })
-      importFlows(importFlowList).then(() => {
+      importFlows(importFlag.value, importFlowList).then(() => {
         ElMessageBox.alert('', '导入成功', {
           confirmButtonText: '确定',
           callback: () => {

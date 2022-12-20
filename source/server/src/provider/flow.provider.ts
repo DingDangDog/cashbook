@@ -140,15 +140,20 @@ export class FlowProvider {
     return res;
   }
 
-  async importFlows(flows: Flow[]) {
-    let nextId: number = await this.getNewId();
-    this.idLock = true;
-    flows.forEach(async (flow) => {
-      flow.id = nextId;
-      nextId++;
-    });
+  async importFlows(flag: string, flows: Flow[]) {
+    if (flag === 'overwrite') {
+      const deleteData = await this.flowModel.deleteMany().exec();
+      console.log(deleteData);
+    } else {
+      let nextId: number = await this.getNewId();
+      this.idLock = true;
+      flows.forEach(async (flow) => {
+        flow.id = nextId;
+        nextId++;
+      });
+      this.idLock = false;
+    }
     const res = await this.flowModel.insertMany(flows);
-    this.idLock = false;
     return res;
   }
 }
