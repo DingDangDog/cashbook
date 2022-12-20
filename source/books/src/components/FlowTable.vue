@@ -67,7 +67,7 @@
       <!-- {{ queryRef }},{{ flowPageRef }} -->
       <el-pagination :current-page="queryRef.pageNum" :page-size="queryRef.pageSize" :total="flowPageRef.totalCount"
         :page-sizes="[10, 20, 50, 100]" @size-change="pageSizeChange" @current-change="pageNumChange" background
-        layout="->, sizes, prev, pager, next">
+        layout="->, total, sizes, prev, pager, next">
       </el-pagination>
     </span>
   </div>
