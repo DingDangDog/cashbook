@@ -71,12 +71,18 @@ export class AnalysisProvider {
         $eq: bookKey,
       },
     };
-    const data: TotalMoneyData[] = await this.flowModel
-      .aggregate()
-      .match(match)
-      .group({ _id: '$bookKey', totalMoney: { $sum: '$money' } })
-      .sort({ _id: 1 })
-      .exec();
-    return data[0].totalMoney || 0;
+    let money = 0;
+    try {
+      const data: TotalMoneyData[] = await this.flowModel
+        .aggregate()
+        .match(match)
+        .group({ _id: '$bookKey', totalMoney: { $sum: '$money' } })
+        .sort({ _id: 1 })
+        .exec();
+      money = data[0].totalMoney;
+    } catch (error) {
+      console.log('总金额查询出错！');
+    }
+    return money;
   }
 }
