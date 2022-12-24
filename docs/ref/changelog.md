@@ -1,4 +1,16 @@
 # 更新日志📣
+### [0.0.19](https://github.com/DingDangDog/cashbook/compare/v0.0.18...v0.0.19) (2022-12-24)
+
+
+### 📚 Documentation | 文档
+
+* 更新文档 ([7bd88b2](https://github.com/DingDangDog/cashbook/commit/7bd88b2043e56d8f5cead5b9c67f4f7b413ff14e))
+
+
+### 🚑 Bug Fixes | Bug 修复
+
+* 总金额统计bug处理 close [#17](https://github.com/DingDangDog/cashbook/issues/17) ([a9ba0ca](https://github.com/DingDangDog/cashbook/commit/a9ba0cab9f226b7cfced29dd75d1a76f44e1f7c6))
+
 ### [0.0.18](https://github.com/DingDangDog/cashbook/compare/v0.0.17...v0.0.18) (2022-12-20)
 
 
