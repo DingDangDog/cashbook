@@ -41,6 +41,6 @@ export interface TypePieChartData {
 }
 
 export interface TotalMoneyData {
-  _id: any;
-  totalMoney: number;
+  _id?: any;
+  totalMoney?: number;
 }

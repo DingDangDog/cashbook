@@ -77,6 +77,6 @@ export class AnalysisProvider {
       .group({ _id: '$bookKey', totalMoney: { $sum: '$money' } })
       .sort({ _id: 1 })
       .exec();
-    return data[0].totalMoney;
+    return data[0].totalMoney || 0;
   }
 }
