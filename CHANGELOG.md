@@ -1,4 +1,17 @@
 # Changelog
+### [0.1.1](https://github.com/DingDangDog/cashbook/compare/v0.1.0...v0.1.1) (2022-12-29)
+
+
+### 📚 Documentation | 文档
+
+* 更新文档 ([ede9cf0](https://github.com/DingDangDog/cashbook/commit/ede9cf02582a74adf2680ceb5564fdc67b4e504c))
+
+
+### 🚑 Bug Fixes | Bug 修复
+
+* 修复聚合计算数字精度异常 close [#14](https://github.com/DingDangDog/cashbook/issues/14) ([cfe12ab](https://github.com/DingDangDog/cashbook/commit/cfe12ab610291248bd829d75dec1e93ced917ddb))
+* 友链没发现问题，可能是网络原因导致？暂时关闭吧 close [#15](https://github.com/DingDangDog/cashbook/issues/15) ([3463a18](https://github.com/DingDangDog/cashbook/commit/3463a18593aa4a0211eed2db9c536cc9bd471acc))
+
 ## [0.1.0](https://github.com/DingDangDog/cashbook/compare/v0.0.19...v0.1.0) (2022-12-24)
 
 
