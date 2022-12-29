@@ -99,7 +99,7 @@ const doQuery = (query: DailyLineChartQuery) => {
       dataList.length = 0;
       res.forEach((data) => {
         xAxisList.push(dateFormater('YYYY-MM-dd', data._id));
-        dataList.push(data.daySum);
+        dataList.push(Number(data.daySum.toFixed(2)));
       })
       optionRef.value.xAxis.data = xAxisList;
       optionRef.value.series[0].data = dataList;

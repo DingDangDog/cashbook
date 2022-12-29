@@ -9,6 +9,6 @@ export const config: Config = {
   version: loadConfig('version', '0.0.1'),
   mongoUrl: loadConfig(
     'mongodb.url',
-    'mongodb://localmongo:localmongo@172.29.96.1:27017/cashbook?authSource=admin',
+    'mongodb://localmongo:localmongo@172.23.208.1:27017/cashbook?authSource=admin',
   ),
 };

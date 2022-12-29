@@ -87,7 +87,7 @@ const doQuery = (query: TypePieChartQuery) => {
       dataList.length = 0;
       res.forEach((data) => {
         dataList.push({
-          value: data.typeSum,
+          value: Number(data.typeSum.toFixed(2)),
           name: data._id,
         });
       })
